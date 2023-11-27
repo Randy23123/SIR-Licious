@@ -1,3 +1,45 @@
-# SIR-Licious
-The link to the Diagram
-https://lucid.app/lucidspark/3deff63b-b0e7-460c-a300-373b74119eaa/edit?beaconFlowId=904FDE5201E39AED&invitationId=inv_aa0cd2a5-3331-4ca9-b6a8-43c5a2a69519&page=0_0#
+# SIR-Licious | Sandwhich Shop
+**Created By:**
+- Randy Lopez
+- Igor "Ivan" Tavarez
+- Chanthapone "Sing" Tuttanon
+
+## Table of Contents:
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Project Diagram](#project-diagram)
+- [Code Highlight](@code-highlight)
+- [Resources](#resources)
+
+## Overview
+// Will configure a more elaborate overview...
+
+SIR-Licious, is a Sandwich ordering application that allows customers (users) to place orders for sandwiches, drinks, and chips. 
+
+
+## Project Structure
+// Will include demo pictures in this section...
+
+Java Classes:
+- 1
+- 2
+- 3
+- 4
+- 5
+- 6
+- 7
+- 8
+- 9
+- 10
+- 11
+- 12
+- 13
+
+## Project Diagram
+![Diagram](src/main/resources/Capstone-2-Diagram.png)
+
+## Code Highlight
+TBD
+
+## Resources
+TBD
