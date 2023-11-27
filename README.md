@@ -8,7 +8,7 @@
 - [Overview](#overview)
 - [Project Structure](#project-structure)
 - [Project Diagram](#project-diagram)
-- [Code Highlight](@code-highlight)
+- [Code Highlight](#code-highlight)
 - [Resources](#resources)
 
 ## Overview
