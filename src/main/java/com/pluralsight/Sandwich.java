@@ -2,7 +2,7 @@ package com.pluralsight;
 
 import java.util.List;
 
-public abstract class Sandwich {
+public class Sandwich {
     private Bread bread;
     private List<Toppings> toppings;
     private boolean toasted;
@@ -13,11 +13,21 @@ public abstract class Sandwich {
         this.toasted = toasted;
     }
 
-    public abstract void addTopping(Toppings topping);
+    public void addTopping(Toppings topping) {
 
-    public abstract void removeTopping(Toppings topping);
+        this.toppings.add(topping);
+    }
 
-    public abstract void setToasted(boolean toasted);
+    public void removeTopping(Toppings topping) {
+        toppings.removeIf(t -> t.equals(topping));
+    }
 
-    public abstract double getPrice();
+    public void setToasted(boolean toasted) {
+        this.toasted = toasted;
+    }
+
+
+    public double calculatePrice() {
+        return 0;
+    }
 }
