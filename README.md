@@ -18,25 +18,43 @@ SIR-Licious, is a Sandwich ordering application that allows customers (users) to
 
 
 ## Project Structure
-// Will include demo pictures in this section...
 
-Java Classes:
-- 1
-- 2
-- 3
-- 4
-- 5
-- 6
-- 7
-- 8
-- 9
-- 10
-- 11
-- 12
-- 13
+Package | Toppings
+- Toppings (Interface):
+- PremiumToppings:
+- Meat:
+- Cheese:
+- RegularToppings:
+- RegularList: 
+
+
+Package | Combo
+- Chips:
+- Drinks:
+
+Package | Sandwich
+- Sandwich (Abstract):
+- CustomSandwich:
+- Size:
+- Bread:
+
+Package | Support
+- Order:
+- CheckOut:
+- "File Writer/Reader"? (TBD)
+
+
+
+Package | Screens
+
+*Will include screen demo pictures in this section...*
+- Main:
+- MainMenu:
+- OrderMenu
+- SandwichMenu:
 
 ## Project Diagram
-![Diagram](src/main/resources/Capstone-2-Diagram.png)
+![Diagram](src/main/resources/Capstone-Diagram.png)
 
 ## Code Highlight
 TBD
