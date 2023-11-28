@@ -7,10 +7,10 @@ public class RegularToppings implements Toppings{
     private String category;
     private double price;
 
-    public RegularToppings(String name, String category, double price) {
+    public RegularToppings(String name, String category, RegularList regularList) {
         this.name = name;
         this.category = category;
-        this.price = price;
+        this.price = 0.00;
     }
 
     @Override
