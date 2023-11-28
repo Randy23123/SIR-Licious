@@ -14,7 +14,13 @@
 ## Overview
 // Will configure a more elaborate overview...
 
-SIR-Licious, is a Sandwich ordering application that allows customers (users) to place orders for sandwiches, drinks, and chips. 
+**Development**
+
+Our team collectively developed the SIR-Licious application, aiming to deliver a user-friendly and efficient ordering system. 
+
+**Application**
+
+SIR-Licious, is a Sandwich ordering application that allows customers (users) to create a custom sandwich order(s) with various options for bread type, toppings, drinks, and chips. The application provides a user-friendly interface to add items to an order, review the order, and proceed to checkout.
 
 
 ## Project Structure
