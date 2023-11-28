@@ -14,7 +14,35 @@ public class Order<T> {
     }
 
     public double calculateTotalPrice() {
-        return 0;
+        double total = 0;
+
+        for (T item : items) {
+            if (item instanceof Sandwich) {
+                total += ((Sandwich) item).calculatePrice();
+            } else if (item instanceof Drink) {
+                total += calculateDrinkPrice((Drink) item);
+            } else if (item instanceof Chips) {
+                total += calculateChipPrice((Chips) item);
+            }
+        }
+
+        return total;
+    }
+
+    private double calculateChipPrice(Chips chip) {
+        return chip.getPrice();
+    }
+
+    private double calculateDrinkPrice(Drink drink) {
+
+        // Adjust the base price based on the size of the drink
+        return switch (drink.getSize().toLowerCase()) {
+            case "small" -> 2.00;
+            case "medium" -> 2.50;
+            case "large" -> 3.00;
+            default ->
+                    throw new IllegalStateException("Unexpected value: " + drink.getSize().toLowerCase());
+        };
     }
 
     public void displayOrderDetails() {

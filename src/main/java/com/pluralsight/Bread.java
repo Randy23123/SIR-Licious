@@ -10,5 +10,9 @@ public class Bread {
     public String getBreadType() {
         return breadType;
     }
+
+    public void setBreadType(String breadType) {
+        this.breadType = breadType;
+    }
 }
 
