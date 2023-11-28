@@ -1,4 +1,5 @@
 # SIR-Licious | Sandwhich Shop
+
 **Created By:**
 - Randy Lopez
 - Igor "Ivan" Tavarez
@@ -17,7 +18,7 @@
 SIR-Licious, is a Sandwich ordering application that allows customers (users) to place orders for sandwiches, drinks, and chips. 
 
 
-## Project Structure
+## Project Structure 
 
 Package | Toppings
 - Toppings (Interface):
@@ -26,7 +27,6 @@ Package | Toppings
 - Cheese:
 - RegularToppings:
 - RegularList: 
-
 
 Package | Combo
 - Chips:
@@ -42,8 +42,6 @@ Package | Support
 - Order:
 - CheckOut:
 - "File Writer/Reader"? (TBD)
-
-
 
 Package | Screens
 
