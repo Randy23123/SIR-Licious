@@ -1,19 +1,16 @@
 package com.pluralsight;
 import java.util.List;
 
-public class Order {
+
+public class Order<T> {
     private int orderID;
     private String customerName;
-    private List<Sandwich> sandwiches;
-    private List<Drink> drinks;
-    private List<Chips> chips;
+    private List<T> items;
 
-    public Order(int orderID, String customerName, List<Sandwich> sandwiches, List<Drink> drinks, List<Chips> chips) {
+    public Order(int orderID, String customerName, List<T> items) {
         this.orderID = orderID;
         this.customerName = customerName;
-        this.sandwiches = sandwiches;
-        this.drinks = drinks;
-        this.chips = chips;
+        this.items = items;
     }
 
     public double calculateTotalPrice() {
