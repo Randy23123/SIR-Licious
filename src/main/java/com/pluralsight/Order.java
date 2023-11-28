@@ -36,12 +36,12 @@ public class Order<T> {
     private double calculateDrinkPrice(Drink drink) {
 
         // Adjust the base price based on the size of the drink
-        return switch (drink.getSize().getSizeType().toLowerCase()) {
+        return switch (drink.getSize().toLowerCase()) {
             case "small" -> 2.00;
             case "medium" -> 2.50;
             case "large" -> 3.00;
             default ->
-                    throw new IllegalStateException("Unexpected value: " + drink.getSize().getSizeType().toLowerCase());
+                    throw new IllegalStateException("Unexpected value: " + drink.getSize().toLowerCase());
         };
     }
 
