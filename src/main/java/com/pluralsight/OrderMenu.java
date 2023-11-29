@@ -235,8 +235,6 @@ public class OrderMenu {
 
 
         private void checkout () {
-//        Order order = new Order<>();
-//        CheckOut checkOut = new CheckOut();
 //        More to be added...
             System.out.println("Checking out...");
         }

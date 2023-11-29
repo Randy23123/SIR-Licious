@@ -45,6 +45,23 @@ public class Order<T> {
         };
     }
 
-    public void displayOrderDetails() {
+    public List<T> getItems() {
+        return items;
+    }
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }
