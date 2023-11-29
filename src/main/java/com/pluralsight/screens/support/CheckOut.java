@@ -93,7 +93,7 @@ public class CheckOut {
             String line;
             int orderID = 0;
             String customerName = "";
-            List<Object> items = new ArrayList<>(); //Subject to change
+            List<Object> items = new ArrayList<>();
 
             while ((line = read.readLine()) != null) {
                 String[] parts = line.split(":");
