@@ -243,12 +243,6 @@ public class OrderMenu {
             return choice;
         }
 
-
-        private void checkout () {
-//        More to be added...
-            System.out.println("Checking out...");
-        }
-
         private void cancelOrder () {
             orderEntries.clear();
             System.out.println("Canceling order... directing to Main Menu");
