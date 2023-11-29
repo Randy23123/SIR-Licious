@@ -1,0 +1,34 @@
+Order ID: 96005
+Customer Name: Sing
+Items Ordered:
+Sandwich Details:
+
+Bread Type: White
+Toppings: 
+	- steak
+	- american
+
+Toasted: false
+Order Total Cost: $0.0
+Order ID: 75597
+Customer Name: Sing
+Items Ordered:
+Sandwich Details:
+
+Bread Type: Wheat
+Toppings: 
+	- ham
+	- american
+
+Toasted: false
+Order Total Cost: $0.0
+Order ID: 48587
+Customer Name: Sing
+Items Ordered:
+Drink: Pepsi | Size: small
+Order Total Cost: $2.0
+Order ID: 37880
+Customer Name: Sing
+Items Ordered:
+Chips: Salt & Vinegar | Price: $1.5
+Order Total Cost: $1.5
