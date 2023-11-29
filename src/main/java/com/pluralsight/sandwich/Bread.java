@@ -11,8 +11,5 @@ public class Bread {
         return breadType;
     }
 
-    public void setBreadType(String breadType) {
-        this.breadType = breadType;
-    }
 }
 

@@ -3,7 +3,7 @@ package com.pluralsight.sandwich.toppings;
 import com.pluralsight.sandwich.Size;
 
 public abstract class PremiumToppings extends Size implements Toppings {
-    private String name;
+    private final String name;
     public PremiumToppings(String name, String sizeType) {
         super(sizeType);
         this.name = name;
@@ -12,11 +12,6 @@ public abstract class PremiumToppings extends Size implements Toppings {
     @Override
     public String getName() {
         return this.name;
-    }
-
-    @Override
-    public String getCategory() {
-        return null;
     }
 
     @Override

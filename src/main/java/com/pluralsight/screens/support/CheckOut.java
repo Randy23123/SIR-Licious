@@ -1,18 +1,13 @@
 package com.pluralsight.screens.support;
 
-import com.pluralsight.combo.Chips;
-import com.pluralsight.combo.Drink;
-import com.pluralsight.sandwich.Bread;
-import com.pluralsight.sandwich.Sandwich;
-import com.pluralsight.sandwich.toppings.Cheese;
-import com.pluralsight.sandwich.toppings.RegularToppings;
-import com.pluralsight.sandwich.toppings.Toppings;
+import com.pluralsight.combo.*;
+import com.pluralsight.sandwich.*;
+import com.pluralsight.sandwich.toppings.*;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CheckOut {
     public static void saveOrderEntry(Order<?> order) {

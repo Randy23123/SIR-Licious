@@ -7,9 +7,9 @@ import java.util.List;
 
 
 public class Order<T> {
-    private int orderID;
-    private String customerName;
-    private List<T> items;
+    private final int orderID;
+    private final String customerName;
+    private final List<T> items;
 
     public Order(int orderID, String customerName, List<T> items) {
         this.orderID = orderID;
@@ -58,15 +58,7 @@ public class Order<T> {
         return orderID;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
     public String getCustomerName() {
         return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 }
