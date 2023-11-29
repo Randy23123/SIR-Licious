@@ -84,7 +84,7 @@ public class CheckOut {
         return "Drink: " + drink.getDrinkType() + " | Size: " + drink.getSize() + "\n";
     }
 
-    private String getChipsOrder(Chips chips) {
+    private static String getChipsOrder(Chips chips) {
         return "Chips: " + chips.getChipType() + " | Price: $" + chips.getPrice() + "\n";
     }
 

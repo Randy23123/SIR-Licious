@@ -1,5 +1,6 @@
 package com.pluralsight.screens;
 
+import com.pluralsight.screens.support.CheckOut;
 import com.pluralsight.screens.support.Order;
 import com.pluralsight.combo.Chips;
 import com.pluralsight.combo.Drink;
@@ -54,7 +55,7 @@ public class OrderMenu {
                     addChips(scan, customerName, id);
                     break;
                 case 4:
-                    checkout();
+                    new CheckOut();
                     break;
                 case 0:
                     cancelOrder();
