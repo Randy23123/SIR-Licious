@@ -1,4 +1,6 @@
-package com.pluralsight;
+package com.pluralsight.sandwich.toppings;
+
+import com.pluralsight.sandwich.Size;
 
 import java.util.ArrayList;
 

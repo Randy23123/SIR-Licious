@@ -1,9 +1,12 @@
-package com.pluralsight;
+package com.pluralsight.screens.support;
+
+import com.pluralsight.combo.Chips;
+import com.pluralsight.combo.Drink;
+import com.pluralsight.sandwich.Sandwich;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CheckOut {

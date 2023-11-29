@@ -1,6 +1,4 @@
-package com.pluralsight;
-
-import java.util.ArrayList;
+package com.pluralsight.sandwich.toppings;
 
 public interface Toppings {
     String getName();

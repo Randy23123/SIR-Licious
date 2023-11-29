@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.sandwich.toppings;
 
 public class RegularList {
     private String[] vegetables = {"lettuce", "peppers", "onions", "tomatoes", "jalapenos", "cucumbers", "pickles", "guacamole", "mushrooms"};

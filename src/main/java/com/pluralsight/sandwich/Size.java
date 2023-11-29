@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.sandwich;
 
 public class Size {
     private static String sizeType;
