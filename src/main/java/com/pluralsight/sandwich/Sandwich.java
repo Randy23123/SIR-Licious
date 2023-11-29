@@ -32,4 +32,16 @@ public class Sandwich {
     public double calculatePrice() {
         return 0;
     }
+
+    public Bread getBread() {
+        return bread;
+    }
+
+    public List<Toppings> getToppings() {
+        return toppings;
+    }
+
+    public boolean isToasted() {
+        return toasted;
+    }
 }
