@@ -23,6 +23,7 @@ public class Order<T> {
         for (T item : items) {
             if (item instanceof Sandwich) {
                 total += ((Sandwich) item).calculatePrice();
+                System.out.println("Inside of Order "+total);
             } else if (item instanceof Drink) {
                 total += calculateDrinkPrice((Drink) item);
             } else if (item instanceof Chips) {

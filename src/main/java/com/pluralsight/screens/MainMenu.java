@@ -24,11 +24,12 @@ public class MainMenu {
                     break;
                 case "0":
                     System.out.println("You have exited application :)");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Not an option pick (0-1)\n");
             }
         }
-        while (!homeScreen.equals("0"));
+        while (homeScreen.equals("0"));
     }
 }

@@ -17,11 +17,7 @@ import java.util.Scanner;
 
 public class OrderMenu {
     // Store orders
-    private List<String> orderEntries;
-
-    public OrderMenu() {
-        orderEntries = new ArrayList<>();
-    }
+    private List<Order> orderEntries = new ArrayList<>();
 
     public void displayMenu() {
         Scanner scan = new Scanner(System.in);
@@ -40,6 +36,7 @@ public class OrderMenu {
                     3. Add Chips
                     4. Checkout
                     5. Cancel Order
+                    6. Go Back Home Screen
                                         
                     Please enter your choice (#):\s""");
             orderOption = scan.nextInt();
@@ -56,10 +53,15 @@ public class OrderMenu {
                     addChips(scan, customerName, id);
                     break;
                 case 4:
-                    new CheckOut();
+                    for (Order order: orderEntries) {
+                        CheckOut.saveOrderEntry(order);
+                    }
                     break;
                 case 5:
                     cancelOrder();
+                    break;
+                case 6:
+                    MainMenu.homeScreen();
                     break;
                 default:
                     System.out.println("Invalid Option... Please enter a valid orderOption.");
@@ -71,13 +73,13 @@ public class OrderMenu {
         List<Toppings> toppingsList = new ArrayList<>();
         // Display the options for customizing the sandwich
         System.out.println("Customize your sandwich:");
-        System.out.println("1. Choose bread type");
+        System.out.println("Choose bread type");
         System.out.println("\t1. White");
         System.out.println("\t2. Wheat");
         System.out.println("\t3. Rye");
         System.out.println("\t4. Wrap");
 
-        int choice = getIntInput(scan, 1, 3);
+        int choice = getIntInput(scan, 1, 4);
         Bread selectedBread = null;
 
         /* pass the chosen options */
@@ -173,7 +175,7 @@ public class OrderMenu {
                 counter++;
             }
 
-            System.out.println("Select the extra cheese you would like (Enter 0 to finish):");
+            System.out.println("Select the extra cheese you would like:");
 
             getIntInput(scan, 0, cheeseList.size());
 
@@ -187,10 +189,9 @@ public class OrderMenu {
 
         System.out.println("\n****** Toast the sandwich ******");
 
-        System.out.println("Would you like your sandwich toasted? (Yes / No): ");
+        System.out.println("Would you like the sandwich toasted? (Yes / No): ");
         String inputToast = scan.next().trim().toLowerCase();
         boolean toast = inputToast.equals("yes");
-
 
         // Once the sandwich is customized, create a Sandwich object
         Sandwich sandwich = new Sandwich(selectedBread,toppingsList, toast );
@@ -201,6 +202,7 @@ public class OrderMenu {
 
         // Create an Order<Sandwich> instance
         Order<Sandwich> order = new Order<>(id, customerName, sandwichesList);
+        orderEntries.add(order);
 
         System.out.println("Sandwich successfully added to your order!");
     }
@@ -216,7 +218,7 @@ public class OrderMenu {
         System.out.println("3. Large");
         int input = scan.nextInt();
         scan.nextLine();
-        String size;
+        String size = null;
         switch (input) {
             case 1 -> size = "small";
             case 2 -> size = "medium";
@@ -225,7 +227,8 @@ public class OrderMenu {
             // Display the list of drinks
             int index = 1;
             for (Drink drink : drinkArrayList) {
-                System.out.println(index + " " + drink.getDrinkType() + " - Price: $" + drink.getPrice("Medium"));
+                assert size != null;
+                System.out.println(index + " " + drink.getDrinkType() + " - Price: $" + drink.getPrice(size));
                 index++;
             }
 
@@ -234,7 +237,6 @@ public class OrderMenu {
             int choice = getIntInput(scan, 0, drinkArrayList.size());
 
             if (choice == 0) {
-                // User chose to finish
                 return;
             }
 
@@ -242,7 +244,7 @@ public class OrderMenu {
             Drink selectedDrink = drinkArrayList.get(choice - 1);
 
             // Create a drink object based on the selected chip
-            Drink drinkToAdd = new Drink(selectedDrink.getDrinkType(), selectedDrink.getDrinkType());
+             Drink drinkToAdd = new Drink(selectedDrink.getDrinkType(), size);
 
             // Create a List<Chips> to hold the chip in the order
             List<Drink> drinksList = new ArrayList<>();
@@ -250,6 +252,7 @@ public class OrderMenu {
 
             // Create an Order<Chips> instance
             Order<Drink> order = new Order<>(id, customerName, drinksList);
+            orderEntries.add(order);
 
             System.out.println("Added " + drinkToAdd.getDrinkType() + " to your order!");
         }
@@ -285,6 +288,7 @@ public class OrderMenu {
 
             // Create an Order<Chips> instance
             Order<Chips> order = new Order<>(id, customerName, chipsList);
+            orderEntries.add(order);
 
             System.out.println("Added " + chipToAdd.getChipType() + " to your order!");
         }
@@ -296,7 +300,7 @@ public class OrderMenu {
                 System.out.print("Enter your choice: ");
                 while (!scanner.hasNextInt()) {
                     System.out.println("Invalid input. Please enter a number.");
-                    scanner.next(); // consume non-integer input
+                    scanner.next();
                 }
                 choice = scanner.nextInt();
             } while (choice < min || choice > max);

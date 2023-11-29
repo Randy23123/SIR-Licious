@@ -31,11 +31,4 @@ public class Chips {
         chipsList.add(new Chips("Sweet Chili Heat", 1.5));
         return chipsList;
     }
-
-    public static void main(String[] args) {
-        ArrayList<Chips> chipArrayList = Chips.createChipList();
-        for (Chips chip : chipArrayList) {
-            System.out.println(chip.getChipType() + " - Price: $" + chip.getPrice());
-        }
-    }
 }

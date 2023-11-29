@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CheckOut {
     public static void saveOrderEntry(Order<?> order) {
-        File receiptsFolder = new File("receipts");
+        File receiptsFolder = new File("src/main/resources/receipts");
         if (!receiptsFolder.exists()) {
             boolean createNew = receiptsFolder.mkdir();
             if (!createNew) {
@@ -40,7 +40,7 @@ public class CheckOut {
     private static String fileNameFormat() {
         LocalDateTime present = LocalDateTime.now();
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
-        return "receipts/" + present.format(formatDate) + ".txt";
+        return "src/main/resources/receipts/" + present.format(formatDate) + ".txt";
     }
 
     private static String getOrderDetails(Order<?> order) {
@@ -66,7 +66,7 @@ public class CheckOut {
 
     private static String getSandwichOrder(Sandwich sandwich) {
         String deliOrder = "Bread Type: " + sandwich.getBread().getBreadType() + "\n" +
-                "Toppings: " + getToppingInformation(sandwich.getToppings()) + "\n" +
+                "Toppings: \n" + getToppingInformation(sandwich.getToppings()) + "\n" +
                 "Toasted: " + sandwich.isToasted() + "\n";
         return "Sandwich Details:\n" + deliOrder;
 
@@ -199,41 +199,3 @@ public class CheckOut {
         return new Chips(type, price);
     }
 }
-
-
-
-//    private ArrayList<String> items;
-//    private double totalPrice;
-//
-//
-//    public CheckOut(ArrayList<String> items, double totalPrice) {
-//        this.items = items;
-//        this.totalPrice = totalPrice;
-//    }
-//
-//    public ArrayList<String> getItems() {
-//        return items;
-//    }
-//
-//    public double getTotalPrice() {
-//        return totalPrice;
-//    }
-//
-//    public void receipt() throws IOException {
-//        LocalDateTime time = LocalDateTime.now();
-//        String file = "receipt_" + time + ".txt";
-//
-//        try(FileWriter fileWriter = new FileWriter(file);
-//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){
-//            bufferedWriter.write("Order Details:\n");
-//            bufferedWriter.write("Items:\n");
-//            for (String item : items) {
-//                bufferedWriter.write("- " + item + "\n");
-//            }
-//            bufferedWriter.write("Total Price: $" + totalPrice + "\n");
-//
-//            System.out.println("Order receipt saved to " + file);
-//            items.clear();
-//            totalPrice = 0.0;
-//        }
-//    }

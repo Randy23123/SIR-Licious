@@ -10,7 +10,7 @@ public class Drink {
         this.drinkType = drinkType;
     }
 
-    public Drink( String drinkType, String size) {
+    public Drink( String drinkType,  String size) {
         this.drinkType = drinkType;
         this.size = size;
     }
@@ -24,11 +24,11 @@ public class Drink {
     }
 
     public double getPrice(String size) {
-       return switch (size.toLowerCase()) {
+       return switch (size) {
            case "small" -> 2.00;
            case "medium" -> 2.50;
            case "large" -> 3.00;
-           default -> throw new IllegalStateException("Unexpected value: " + size.toLowerCase());
+           default -> throw new IllegalStateException("Unexpected value: " + size);
        };
     }
 
