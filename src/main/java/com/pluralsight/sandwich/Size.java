@@ -1,14 +1,13 @@
-package com.pluralsight;
+package com.pluralsight.sandwich;
 
 public class Size {
-    private String sizeType;
+    private static String sizeType;
 
     public Size(String sizeType) {
         this.sizeType = sizeType;
     }
 
-    public String getSizeType() {
+    public static String getSizeType() {
         return sizeType;
     }
 }
-

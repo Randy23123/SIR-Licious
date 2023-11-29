@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.combo;
 
 import java.util.ArrayList;
 

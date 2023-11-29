@@ -1,17 +1,17 @@
-package com.pluralsight;
+package com.pluralsight.sandwich.toppings;
 
 import java.util.ArrayList;
 
 public class Cheese extends PremiumToppings {
-    private double cheesePrice;
+    private static double cheesePrice;
     private double extraCheeseCost;
 
-    public Cheese(String name, String sizeType, double cheesePrice, double extraCheeseCost) {
+    public Cheese(String name, String sizeType, double cheesePrice) {
         super(name, sizeType);
         this.cheesePrice = cheesePrice;
         this.extraCheeseCost = extraCheeseCost;
     }
-    public double getCheesePrice() {
+    public static double getCheesePrice() {
         switch (getSizeType()) {
             case "4 inch":
                 return cheesePrice + .75;
@@ -42,14 +42,14 @@ public class Cheese extends PremiumToppings {
         return totalCheesePrice;
     }
 
-    public static ArrayList<Cheese> createCheeseList(double cheesePrice, double extraCheeseCost, String sizeType) {
+    public static ArrayList<Cheese> createCheeseList() {
         ArrayList<Cheese> cheeseList = new ArrayList<>();
 
-        cheeseList.add(new Cheese("cheddar", sizeType, cheesePrice, extraCheeseCost));
-        cheeseList.add(new Cheese("swiss", sizeType, cheesePrice, extraCheeseCost));
-        cheeseList.add(new Cheese("pepper jack", sizeType, cheesePrice, extraCheeseCost));
-        cheeseList.add(new Cheese("provolone", sizeType, cheesePrice, extraCheeseCost));
-        cheeseList.add(new Cheese("american", sizeType, cheesePrice, extraCheeseCost));
+        cheeseList.add(new Cheese("cheddar", getSizeType(), getCheesePrice()));
+        cheeseList.add(new Cheese("swiss", getSizeType(), getCheesePrice()));
+        cheeseList.add(new Cheese("pepper jack", getSizeType(), getCheesePrice()));
+        cheeseList.add(new Cheese("provolone", getSizeType(), getCheesePrice()));
+        cheeseList.add(new Cheese("american", getSizeType(), getCheesePrice()));
         return cheeseList;
     }
 }

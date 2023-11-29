@@ -1,16 +1,14 @@
-package com.pluralsight;
+package com.pluralsight.sandwich.toppings;
 
-import java.util.ArrayList;
-
-public class RegularToppings implements Toppings{
+public class RegularToppings implements Toppings {
     private String name;
     private String category;
     private double price;
 
-    public RegularToppings(String name, String category, double price) {
+    public RegularToppings(String name, String category, RegularList regularList) {
         this.name = name;
         this.category = category;
-        this.price = price;
+        this.price = 0.00;
     }
 
     @Override
