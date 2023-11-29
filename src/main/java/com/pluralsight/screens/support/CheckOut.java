@@ -65,7 +65,7 @@ public class CheckOut {
     }
 
     private static String getSandwichOrder(Sandwich sandwich) {
-        String deliOrder = "\nBread Type: " + sandwich.getBread().getBreadType() + "\n" +
+        String deliOrder = "Bread Type: " + sandwich.getBread().getBreadType() + "\n" +
                 "Toppings: \n" + getToppingInformation(sandwich.getToppings()) + "\n" +
                 "Toasted: " + sandwich.isToasted() + "\n";
         return "Sandwich Details:\n" + deliOrder;
