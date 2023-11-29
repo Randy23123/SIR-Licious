@@ -27,7 +27,7 @@ public class CheckOut {
 
         String fileName = fileNameFormat();
         String orderInformation = getOrderDetails(order);
-        try (BufferedWriter write = new BufferedWriter(new FileWriter(fileName))) {
+        try (BufferedWriter write = new BufferedWriter(new FileWriter(fileName,true))) {
             if (orderInformation != null) {
                 write.write(orderInformation);
             }
@@ -65,7 +65,7 @@ public class CheckOut {
     }
 
     private static String getSandwichOrder(Sandwich sandwich) {
-        String deliOrder = "Bread Type: " + sandwich.getBread().getBreadType() + "\n" +
+        String deliOrder = "\nBread Type: " + sandwich.getBread().getBreadType() + "\n" +
                 "Toppings: \n" + getToppingInformation(sandwich.getToppings()) + "\n" +
                 "Toasted: " + sandwich.isToasted() + "\n";
         return "Sandwich Details:\n" + deliOrder;
