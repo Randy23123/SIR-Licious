@@ -13,6 +13,7 @@ import com.pluralsight.sandwich.toppings.Toppings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class OrderMenu {
@@ -23,12 +24,12 @@ public class OrderMenu {
         Scanner scan = new Scanner(System.in);
         int orderOption;
         String customerName;
-        int id = 12514;
+        Random random = new Random();
 
         System.out.println("Can I have a name for your order?");
         customerName = scan.nextLine();
         do {
-
+            int id = random.nextInt(100000);
             System.out.println("""
                     \nOrder Menu Screen:
                     1. Add Sandwich
