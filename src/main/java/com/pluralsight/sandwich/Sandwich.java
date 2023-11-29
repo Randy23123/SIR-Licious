@@ -5,9 +5,9 @@ import com.pluralsight.sandwich.toppings.Toppings;
 import java.util.List;
 
 public class Sandwich {
-    private Bread bread;
-    private List<Toppings> toppings;
-    private boolean toasted;
+    private final Bread bread;
+    private final List<Toppings> toppings;
+    private final boolean toasted;
 
     public Sandwich(Bread bread, List<Toppings> toppings, boolean toasted) {
         this.bread = bread;
@@ -22,10 +22,6 @@ public class Sandwich {
 
     public void removeTopping(Toppings topping) {
         toppings.removeIf(t -> t.equals(topping));
-    }
-
-    public void setToasted(boolean toasted) {
-        this.toasted = toasted;
     }
 
 

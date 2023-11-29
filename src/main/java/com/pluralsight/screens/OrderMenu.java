@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class OrderMenu {
     // Store orders
-    private List<Order> orderEntries = new ArrayList<>();
+    private final List<Order> orderEntries = new ArrayList<>();
 
     public void displayMenu() {
         Scanner scan = new Scanner(System.in);
@@ -89,7 +89,7 @@ public class OrderMenu {
             case 2 -> selectedBread = new Bread("Wheat");
             case 3 -> selectedBread = new Bread("Rye");
             case 4 -> selectedBread = new Bread("Wrap");
-        };
+        }
         System.out.println("2. Choose sandwich size");
         System.out.println("\t1. 4 inches");
         System.out.println("\t2. 8 inches");
@@ -101,7 +101,7 @@ public class OrderMenu {
             case 1 -> new Size("4");
             case 2 -> new Size("8");
             case 3 -> new Size("12");
-        };
+        }
         System.out.println("\n****** Choose your meat ******");
 
         List<Meats> meatsList = Meats.createMeatsList(Size.getSizeType());

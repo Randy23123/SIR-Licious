@@ -1,9 +1,9 @@
 package com.pluralsight.sandwich.toppings;
 
 public class RegularToppings implements Toppings {
-    private String name;
-    private String category;
-    private double price;
+    private final String name;
+    private final String category;
+    private final double price;
 
     public RegularToppings(String name, String category, RegularList regularList) {
         this.name = name;
@@ -14,11 +14,6 @@ public class RegularToppings implements Toppings {
     @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public String getCategory() {
-        return category;
     }
 
     @Override

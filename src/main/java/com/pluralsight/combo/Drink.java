@@ -3,7 +3,7 @@ package com.pluralsight.combo;
 import java.util.ArrayList;
 
 public class Drink {
-    private String drinkType;
+    private final String drinkType;
     private String size;
 
     public Drink(String drinkType) {
