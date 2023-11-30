@@ -38,7 +38,7 @@ public class Sandwich {
 
 
     public double calculatePrice() {
-        double totalPrice = getSandwichPricePrice(Size.getSizeType());
+        double totalPrice = getSandwichPricePrice(Bread.getSizeType());
         for (Toppings t: toppings) {
             totalPrice += t.getPrice();
         }
