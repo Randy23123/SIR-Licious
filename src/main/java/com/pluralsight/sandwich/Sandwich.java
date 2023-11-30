@@ -8,6 +8,7 @@ public class Sandwich {
     private final Bread bread;
     private final List<Toppings> toppings;
     private final boolean toasted;
+    private double SandwichPrice;
 
     public Sandwich(Bread bread, List<Toppings> toppings, boolean toasted) {
         this.bread = bread;
@@ -25,8 +26,23 @@ public class Sandwich {
     }
 
 
+    public double getSandwichPricePrice(String sizeType) {
+        return switch (sizeType) {
+            case "4" -> this.SandwichPrice = 5.50;
+            case "8" -> this.SandwichPrice = 7.00;
+            case "12" -> this.SandwichPrice = 8.50;
+            default -> 0;
+        };
+
+    }
+
+
     public double calculatePrice() {
-        return 0;
+        double totalPrice = getSandwichPricePrice(Size.getSizeType());
+        for (Toppings t: toppings) {
+            totalPrice += t.getPrice();
+        }
+        return totalPrice;
     }
 
     public Bread getBread() {
