@@ -21,13 +21,22 @@ public class PremiumToppings extends Bread implements Toppings {
         return this.name;
     }
 
+    public double getBasePrice() {
+        return this.basePrice;
+    }
+
+
+    public double getExtraPrice() {
+        return this.extraPrice;
+    }
+
+    public double getTotalPrice() {
+        return this.basePrice + this.extraPrice;
+    }
+
     @Override
     public double getPrice() {
-        if (extraPrice == 0) {
-            return basePrice;
-        } else {
-            return basePrice;
-        }
+        return this.getTotalPrice();
     }
 
     public static ArrayList<PremiumToppings> createMeatsList(String breadType, String sizeType) {

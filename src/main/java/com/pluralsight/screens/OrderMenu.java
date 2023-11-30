@@ -91,9 +91,9 @@ public class OrderMenu {
         System.out.println("\t1. 4 inches");
         System.out.println("\t2. 8 inches");
         System.out.println("\t3. 12 inches");
-        int sizeChoice = getIntInput(scan, 1, 3);
 
         /* pass the chosen options */
+        int sizeChoice = getIntInput(scan, 1, 3);
         Bread.setSizeType(switch (sizeChoice) {
             case 1 -> ("4");
             case 2 -> ("8");
@@ -104,15 +104,13 @@ public class OrderMenu {
         //---------------------------------------------------------------------------
 
         System.out.println("\n****** Choose your meat ******");
-
         List<PremiumToppings> meatsList = PremiumToppings.createMeatsList(selectedBread.getBreadType(), Bread.getSizeType());
         int index = 1;
         for (PremiumToppings meats : meatsList) {
-            System.out.println(index + " " + meats.getName() + " - Price: $" + meats.getPrice());
+            System.out.println(index + " " + meats.getName() + " - Price: $" + meats.getBasePrice());
             index++;
         }
         System.out.println("Select the meat you would like (Enter 0 to finish):");
-
         int choiceMeat = getIntInput(scan, 0, meatsList.size());
 
         if (choiceMeat == 0) {
@@ -121,7 +119,7 @@ public class OrderMenu {
         }
 
         // Get the selected meat from the list
-        PremiumToppings selectedMeats = meatsList.get(choiceMeat - 1);
+        Toppings selectedMeats = meatsList.get(choiceMeat - 1);
 
         toppingsList.add(selectedMeats);
 
@@ -130,7 +128,7 @@ public class OrderMenu {
         if (input.equals("yes")) {
             int count1 = 1;
             for (PremiumToppings meats : meatsList) {
-                System.out.println(count1 + " " + meats.getName() + " - Price: $" + meats.getPrice());
+                System.out.println(count1 + " " + meats.getName() + " - Price: $" + meats.getExtraPrice());
                 count1++;
             }
 
@@ -155,7 +153,7 @@ public class OrderMenu {
         List<PremiumToppings> cheeseList = PremiumToppings.createCheeseList(Bread.getSizeType());
         int count = 1;
         for (PremiumToppings cheese : cheeseList) {
-            System.out.println(count + " " + cheese.getName() + " - Price: $" + cheese.getPrice());
+            System.out.println(count + " " + cheese.getName() + " - Price: $" + cheese.getBasePrice());
             count++;
         }
         System.out.println("Select the cheese you would like (Enter 0 to finish):");
@@ -172,7 +170,7 @@ public class OrderMenu {
         if (inputCheese.equals("yes")) {
             int counter = 1;
             for (PremiumToppings cheese : cheeseList) {
-                System.out.println(counter + " " + cheese.getName() + " - Price: $" + cheese.getPrice());
+                System.out.println(counter + " " + cheese.getName() + " - Price: $" + cheese.getExtraPrice());
                 counter++;
             }
 
