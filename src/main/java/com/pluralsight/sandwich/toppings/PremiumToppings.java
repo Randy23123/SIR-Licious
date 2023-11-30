@@ -1,11 +1,13 @@
 package com.pluralsight.sandwich.toppings;
 
-import com.pluralsight.sandwich.Size;
 
-public abstract class PremiumToppings extends Size implements Toppings {
+import com.pluralsight.sandwich.Bread;
+
+public abstract class PremiumToppings extends Bread implements Toppings {
     private final String name;
-    public PremiumToppings(String name, String sizeType) {
-        super(sizeType);
+
+    public PremiumToppings(String breadType, String sizeType, String name) {
+        super(breadType, sizeType);
         this.name = name;
     }
 

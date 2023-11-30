@@ -6,7 +6,6 @@ import com.pluralsight.combo.Chips;
 import com.pluralsight.combo.Drink;
 import com.pluralsight.sandwich.Bread;
 import com.pluralsight.sandwich.Sandwich;
-import com.pluralsight.sandwich.Size;
 import com.pluralsight.sandwich.toppings.Cheese;
 import com.pluralsight.sandwich.toppings.Meats;
 import com.pluralsight.sandwich.toppings.Toppings;
@@ -85,10 +84,10 @@ public class OrderMenu {
 
         /* pass the chosen options */
         switch (choice) {
-            case 1 -> selectedBread = new Bread("White");
-            case 2 -> selectedBread = new Bread("Wheat");
-            case 3 -> selectedBread = new Bread("Rye");
-            case 4 -> selectedBread = new Bread("Wrap");
+            case 1 -> selectedBread = new Bread("White","");
+            case 2 -> selectedBread = new Bread("Wheat","");
+            case 3 -> selectedBread = new Bread("Rye","");
+            case 4 -> selectedBread = new Bread("Wrap","");
         }
         System.out.println("2. Choose sandwich size");
         System.out.println("\t1. 4 inches");
@@ -98,13 +97,13 @@ public class OrderMenu {
 
         /* pass the chosen options */
         switch (sizeChoice) {
-            case 1 -> new Size("4");
-            case 2 -> new Size("8");
-            case 3 -> new Size("12");
+            case 1 -> new Bread("","4");
+            case 2 -> new Bread("","8");
+            case 3 -> new Bread("","12");
         }
         System.out.println("\n****** Choose your meat ******");
 
-        List<Meats> meatsList = Meats.createMeatsList(Size.getSizeType());
+        List<Meats> meatsList = Meats.createMeatsList(Bread.getSizeType());
         int index = 1;
         for (Meats meats : meatsList) {
             System.out.println(index + " " + meats.getName() + " - Price: $" + meats.getMeatPrice());
@@ -152,7 +151,7 @@ public class OrderMenu {
 
         System.out.println("\n****** Add cheese ******");
 
-        List<Cheese> cheeseList = Cheese.createCheeseList(Size.getSizeType());
+        List<Cheese> cheeseList = Cheese.createCheeseList(Bread.getSizeType());
         int count = 1;
         for (Cheese cheese : cheeseList) {
             System.out.println(count + " " + cheese.getName() + " - Price: $" + cheese.getCheesePrice());

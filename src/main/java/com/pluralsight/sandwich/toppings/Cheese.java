@@ -1,6 +1,7 @@
 package com.pluralsight.sandwich.toppings;
 
-import com.pluralsight.sandwich.Size;
+import com.pluralsight.sandwich.Bread;
+
 
 import java.util.ArrayList;
 
@@ -8,24 +9,24 @@ public class Cheese extends PremiumToppings {
     private double cheesePrice;
 
     public Cheese(String name, String sizeType, double cheesePrice) {
-        super(name, sizeType);
+        super(name, sizeType, name);
         this.cheesePrice = cheesePrice;
     }
 
 
 
     public double getCheesePrice() {
-        switch (Size.getSizeType()) {
+        switch (Bread.getSizeType()) {
             case "4":
-                for (Cheese cheese : createCheeseList(Size.getSizeType())) {
+                for (Cheese cheese : createCheeseList(Bread.getSizeType())) {
                     return cheese.cheesePrice = 0.75;
                 }
             case "8":
-                for (Cheese cheese : createCheeseList(Size.getSizeType())) {
+                for (Cheese cheese : createCheeseList(Bread.getSizeType())) {
                     return cheese.cheesePrice = 1.50;
                 }
             case "12":
-                for (Cheese cheese : createCheeseList(Size.getSizeType())) {
+                for (Cheese cheese : createCheeseList(Bread.getSizeType())) {
                     return cheese.cheesePrice = 2.25;
                 }
         }
@@ -35,17 +36,17 @@ public class Cheese extends PremiumToppings {
     public double getCheesePrice(boolean extraCheese) {
 
         if (extraCheese) {
-            switch (Size.getSizeType()) {
+            switch (Bread.getSizeType()) {
                 case "4":
-                    for (Cheese cheese : createCheeseList(Size.getSizeType())) {
+                    for (Cheese cheese : createCheeseList(Bread.getSizeType())) {
                         return cheese.cheesePrice = 0.30;
                     }
                 case "8":
-                    for (Cheese cheese : createCheeseList(Size.getSizeType())) {
+                    for (Cheese cheese : createCheeseList(Bread.getSizeType())) {
                         return cheese.cheesePrice = 0.60;
                     }
                 case "12":
-                    for (Cheese cheese : createCheeseList(Size.getSizeType())) {
+                    for (Cheese cheese : createCheeseList(Bread.getSizeType())) {
                         return cheese.cheesePrice = 0.90;
                     }
             }
