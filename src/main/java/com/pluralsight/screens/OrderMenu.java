@@ -51,7 +51,7 @@ public class OrderMenu {
                     addChips(scan, customerName, id);
                     break;
                 case 4:
-                    for (Order order: orderEntries) {
+                    for (Order order : orderEntries) {
                         CheckOut.saveOrderEntry(order);
                     }
                     break;
@@ -95,63 +95,12 @@ public class OrderMenu {
 
         /* pass the chosen options */
         switch (sizeChoice) {
-            case 1 -> new Bread("","4");
-            case 2 -> new Bread("","8");
-            case 3 -> new Bread("","12");
-        }
-        System.out.println("\n****** Choose your vegetables ******");
-
-        List<RegularList> vegetables = RegularList.createVegetablesList();
-
-        int index2 = 1;
-        for (RegularList vegetable : vegetables) {
-            System.out.println(index2 + " " + vegetable.getName());
-            index2++;
+            case 1 -> new Bread("", "4");
+            case 2 -> new Bread("", "8");
+            case 3 -> new Bread("", "12");
         }
 
-        System.out.println("Select the vegetables you would like: ");
-        int choiceVegetables =  getIntInput(scan, 0, vegetables.size());
-
-
-        RegularList selectedVegetables  = vegetables.get(choiceVegetables - 1);
-
-        toppingsList.add(selectedVegetables);
-
-        System.out.println("\n****** Choose your sauces ******");
-
-        List<RegularList> sauces = RegularList.createSaucesList();
-
-        int index3 = 1;
-        for (RegularList sauce : sauces) {
-            System.out.println(index3 + " " + sauce.getName());
-            index3++;
-        }
-
-        System.out.println("Select the sauce you would like: ");
-        int choiceSauces =  getIntInput(scan, 0, sauces.size());
-
-
-        RegularList selectedSauce  = sauces.get(choiceSauces - 1);
-
-        toppingsList.add(selectedSauce);
-
-        System.out.println("\n****** Choose your sides ******");
-
-        List<RegularList> sidesList = RegularList.createSidesList();
-
-        int index4 = 1;
-        for (RegularList sides : sidesList) {
-            System.out.println(index4 + " " + sides.getName());
-            index4++;
-        }
-
-        System.out.println("Select the sides you would like: ");
-        int choiceSides =  getIntInput(scan, 0, sidesList.size());
-
-
-        RegularList selectedSides  = sidesList.get(choiceSides - 1);
-
-        toppingsList.add(selectedSides);
+        //---------------------------------------------------------------------------
 
         System.out.println("\n****** Choose your meat ******");
 
@@ -163,7 +112,7 @@ public class OrderMenu {
         }
         System.out.println("Select the meat you would like (Enter 0 to finish):");
 
-        int choiceMeat =  getIntInput(scan, 0, meatsList.size());
+        int choiceMeat = getIntInput(scan, 0, meatsList.size());
 
         if (choiceMeat == 0) {
             // User chose to finish
@@ -177,29 +126,28 @@ public class OrderMenu {
 
         System.out.println("Would you like to add extra meat (Yes / NO)?");
         String input = scan.next().trim().toLowerCase();
-       if (input.equals("yes")) {
-           int count1 = 1;
-           for (Meats meats : meatsList) {
-               System.out.println(count1 + " " + meats.getName() + " - Price: $" + meats.getMeatPrice(true));
-               count1++;
-           }
+        if (input.equals("yes")) {
+            int count1 = 1;
+            for (Meats meats : meatsList) {
+                System.out.println(count1 + " " + meats.getName() + " - Price: $" + meats.getMeatPrice(true));
+                count1++;
+            }
 
-           System.out.println("Select the extra meat you would like (Enter 0 to finish):");
+            System.out.println("Select the extra meat you would like (Enter 0 to finish):");
 
-           int choiceExtraMeat =  getIntInput(scan, 0, meatsList.size());
+            int choiceExtraMeat = getIntInput(scan, 0, meatsList.size());
 
-           if (choiceExtraMeat == 0) {
-               // User chose to finish
-               return;
-           }
-               // Get the selected meat from the list
-               Meats selectedExtraMeats = meatsList.get(meatsList.size()  - 1);
+            if (choiceExtraMeat == 0) {
+                // User chose to finish
+                return;
+            }
+            // Get the selected meat from the list
+            Meats selectedExtraMeats = meatsList.get(meatsList.size() - 1);
 
-               toppingsList.add(selectedExtraMeats);
-       }
+            toppingsList.add(selectedExtraMeats);
+        }
 
-
-
+        //---------------------------------------------------------------------------
 
         System.out.println("\n****** Add cheese ******");
 
@@ -211,7 +159,7 @@ public class OrderMenu {
         }
         System.out.println("Select the cheese you would like (Enter 0 to finish):");
 
-         getIntInput(scan, 0, cheeseList.size());
+        getIntInput(scan, 0, cheeseList.size());
 
         // Get the selected meat from the list
         Cheese selectedCheese = cheeseList.get(cheeseList.size() - 1);
@@ -231,13 +179,13 @@ public class OrderMenu {
 
             getIntInput(scan, 0, cheeseList.size());
 
-                // Get the selected meat from the list
+            // Get the selected meat from the list
             Cheese selectedExtraCheese = cheeseList.get(cheeseList.size() - 1);
 
             toppingsList.add(selectedExtraCheese);
         }
 
-
+        //---------------------------------------------------------------------------
 
         System.out.println("\n****** Toast the sandwich ******");
 
@@ -246,7 +194,7 @@ public class OrderMenu {
         boolean toast = inputToast.equals("yes");
 
         // Once the sandwich is customized, create a Sandwich object
-        Sandwich sandwich = new Sandwich(selectedBread,toppingsList, toast );
+        Sandwich sandwich = new Sandwich(selectedBread, toppingsList, toast);
         sandwich.getSandwichPricePrice(Bread.getSizeType());
 
         // Create a List<Sandwich> to hold the sandwich in the order
@@ -259,10 +207,91 @@ public class OrderMenu {
 
         System.out.println(order.calculateTotalPrice());
 
+        //---------------------------------------------------------------------------
+
+        System.out.println("\n****** Choose your vegetables ******");
+
+        List<RegularList> vegetables = RegularList.createVegetablesList();
+        List<RegularList> selectedVegetables = new ArrayList<>();
+
+        do {
+            System.out.println("\nAvailable Vegetables:");
+            int index2 = 1;
+            for (RegularList vegetable : vegetables) {
+                System.out.println(index2 + " " + vegetable.getName());
+                index2++;
+            }
+
+            System.out.println("Select the vegetables you would like (Enter 0 to finish): ");
+            int choiceVegetables = getIntInput(scan, 0, vegetables.size());
+            if (choiceVegetables == 0) {
+                // User chose to finish
+                break;
+            }
+            RegularList chosenVegetable = vegetables.get(choiceVegetables - 1);
+            selectedVegetables.add(chosenVegetable);
+
+        } while (true);
+
+        toppingsList.addAll(selectedVegetables);
+
+        //---------------------------------------------------------------------------
+
+        System.out.println("\n****** Choose your sauces ******");
+
+        List<RegularList> sauces = RegularList.createSaucesList();
+        List<RegularList> selectedSauces = new ArrayList<>();
+
+        do {
+            System.out.println("\nAvailable Sauces:");
+            int index3 = 1;
+            for (RegularList sauce : sauces) {
+                System.out.println(index3 + " " + sauce.getName());
+                index3++;
+            }
+
+            System.out.println("Select the sauces you would like (Enter 0 to finish): ");
+            int choiceSauces = getIntInput(scan, 0, sauces.size());
+            if (choiceSauces == 0) {
+                break;
+            }
+            RegularList chosenSauce = sauces.get(choiceSauces - 1);
+            selectedSauces.add(chosenSauce);
+        }while (true);
+
+        toppingsList.addAll(selectedSauces);
+
+        //---------------------------------------------------------------------------
+
+        System.out.println("\n****** Choose your sides ******");
+
+        List<RegularList> sidesList = RegularList.createSidesList();
+        List<RegularList> selectedSides = new ArrayList<>();
+
+        do {
+            System.out.println("\nAvailable Sides:");
+        int index4 = 1;
+        for (RegularList sides : sidesList) {
+            System.out.println(index4 + " " + sides.getName());
+            index4++;
+        }
+
+        System.out.println("Select the sides you would like (Enter 0 to finish): ");
+        int choiceSides = getIntInput(scan, 0, sidesList.size());
+            if (choiceSides == 0) {
+                break;
+            }
+        RegularList chosenSides = sidesList.get(choiceSides - 1);
+            selectedSides.add(chosenSides);
+        }while (true);
+
+        toppingsList.addAll(selectedSides);
+
         System.out.println("Sandwich successfully added to your order!");
+
     }
 
-
+    //---------------------------------------------------------------------------
 
     private void addDrinks(Scanner scan, String customerName, int id) {
         ArrayList<Drink> drinkArrayList = Drink.createDrinkList();
@@ -279,92 +308,94 @@ public class OrderMenu {
             case 2 -> size = "medium";
             case 3 -> size = "large";
         }
-            // Display the list of drinks
-            int index = 1;
-            for (Drink drink : drinkArrayList) {
-                assert size != null;
-                System.out.println(index + " " + drink.getDrinkType() + " - Price: $" + drink.getPrice(size));
-                index++;
-            }
-
-            System.out.println("Select the number of the drink you would like (Enter 0 to finish):");
-
-            int choice = getIntInput(scan, 0, drinkArrayList.size());
-
-            if (choice == 0) {
-                return;
-            }
-
-            // Get the selected drink from the list
-            Drink selectedDrink = drinkArrayList.get(choice - 1);
-
-            // Create a drink object based on the selected chip
-             Drink drinkToAdd = new Drink(selectedDrink.getDrinkType(), size);
-
-            // Create a List<Chips> to hold the chip in the order
-            List<Drink> drinksList = new ArrayList<>();
-            drinksList.add(drinkToAdd);
-
-            // Create an Order<Chips> instance
-            Order<Drink> order = new Order<>(id, customerName, drinksList);
-            orderEntries.add(order);
-
-            System.out.println("Added " + drinkToAdd.getDrinkType() + " to your order!");
+        // Display the list of drinks
+        int index = 1;
+        for (Drink drink : drinkArrayList) {
+            assert size != null;
+            System.out.println(index + " " + drink.getDrinkType() + " - Price: $" + drink.getPrice(size));
+            index++;
         }
 
-        private void addChips (Scanner scan, String customerName,int id){
-            ArrayList<Chips> chipArrayList = Chips.createChipList();
+        System.out.println("Select the number of the drink you would like (Enter 0 to finish):");
 
-            // Display the list of chips
-            int index = 1;
-            for (Chips chip : chipArrayList) {
-                System.out.println(index + " " + chip.getChipType() + " - Price: $" + chip.getPrice());
-                index++;
-            }
+        int choice = getIntInput(scan, 0, drinkArrayList.size());
 
-            System.out.println("Select the number of the chip you would like (Enter 0 to finish):");
-
-            int choice = getIntInput(scan, 0, chipArrayList.size());
-
-            if (choice == 0) {
-                // User chose to finish
-                return;
-            }
-
-            // Get the selected chip from the list
-            Chips selectedChip = chipArrayList.get(choice - 1);
-
-            // Create a Chip object based on the selected chip
-            Chips chipToAdd = new Chips(selectedChip.getChipType(), selectedChip.getPrice());
-
-            // Create a List<Chips> to hold the chip in the order
-            List<Chips> chipsList = new ArrayList<>();
-            chipsList.add(chipToAdd);
-
-            // Create an Order<Chips> instance
-            Order<Chips> order = new Order<>(id, customerName, chipsList);
-            orderEntries.add(order);
-
-            System.out.println("Added " + chipToAdd.getChipType() + " to your order!");
+        if (choice == 0) {
+            return;
         }
 
+        // Get the selected drink from the list
+        Drink selectedDrink = drinkArrayList.get(choice - 1);
 
-        private int getIntInput (Scanner scanner,int min, int max){
-            int choice;
-            do {
-                System.out.print("Enter your choice: ");
-                while (!scanner.hasNextInt()) {
-                    System.out.println("Invalid input. Please enter a number.");
-                    scanner.next();
-                }
-                choice = scanner.nextInt();
-            } while (choice < min || choice > max);
+        // Create a drink object based on the selected chip
+        Drink drinkToAdd = new Drink(selectedDrink.getDrinkType(), size);
 
-            return choice;
-        }
+        // Create a List<Chips> to hold the chip in the order
+        List<Drink> drinksList = new ArrayList<>();
+        drinksList.add(drinkToAdd);
 
-        private void cancelOrder () {
-            orderEntries.clear();
-            System.out.println("Canceling order... directing to Main Menu");
-        }
+        // Create an Order<Chips> instance
+        Order<Drink> order = new Order<>(id, customerName, drinksList);
+        orderEntries.add(order);
+
+        System.out.println("Added " + drinkToAdd.getDrinkType() + " to your order!");
     }
+
+    //---------------------------------------------------------------------------
+
+    private void addChips(Scanner scan, String customerName, int id) {
+        ArrayList<Chips> chipArrayList = Chips.createChipList();
+
+        // Display the list of chips
+        int index = 1;
+        for (Chips chip : chipArrayList) {
+            System.out.println(index + " " + chip.getChipType() + " - Price: $" + chip.getPrice());
+            index++;
+        }
+
+        System.out.println("Select the number of the chip you would like (Enter 0 to finish):");
+
+        int choice = getIntInput(scan, 0, chipArrayList.size());
+
+        if (choice == 0) {
+            // User chose to finish
+            return;
+        }
+
+        // Get the selected chip from the list
+        Chips selectedChip = chipArrayList.get(choice - 1);
+
+        // Create a Chip object based on the selected chip
+        Chips chipToAdd = new Chips(selectedChip.getChipType(), selectedChip.getPrice());
+
+        // Create a List<Chips> to hold the chip in the order
+        List<Chips> chipsList = new ArrayList<>();
+        chipsList.add(chipToAdd);
+
+        // Create an Order<Chips> instance
+        Order<Chips> order = new Order<>(id, customerName, chipsList);
+        orderEntries.add(order);
+
+        System.out.println("Added " + chipToAdd.getChipType() + " to your order!");
+    }
+
+
+    private int getIntInput(Scanner scanner, int min, int max) {
+        int choice;
+        do {
+            System.out.print("Enter your choice: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+            }
+            choice = scanner.nextInt();
+        } while (choice < min || choice > max);
+
+        return choice;
+    }
+
+    private void cancelOrder() {
+        orderEntries.clear();
+        System.out.println("Canceling order... directing to Main Menu");
+    }
+}
