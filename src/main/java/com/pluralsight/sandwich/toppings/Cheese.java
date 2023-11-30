@@ -12,8 +12,6 @@ public class Cheese extends PremiumToppings {
         this.cheesePrice = cheesePrice;
     }
 
-
-
     public double getCheesePrice() {
         switch (Size.getSizeType()) {
             case "4":

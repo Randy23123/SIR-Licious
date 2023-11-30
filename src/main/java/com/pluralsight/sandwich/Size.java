@@ -7,8 +7,6 @@ public class Size {
         Size.sizeType = sizeType;
     }
 
-
-
     public static String getSizeType() {
         return sizeType;
     }
