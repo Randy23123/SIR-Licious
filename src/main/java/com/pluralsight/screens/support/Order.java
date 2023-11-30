@@ -3,13 +3,15 @@ import com.pluralsight.combo.Chips;
 import com.pluralsight.combo.Drink;
 import com.pluralsight.sandwich.Sandwich;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Order<T> {
-    private final int orderID;
-    private final String customerName;
-    private final List<T> items;
+    private int orderID;
+    private String customerName;
+    private List<T> items;
+    private double total;
 
     public Order(int orderID, String customerName, List<T> items) {
         this.orderID = orderID;
@@ -18,8 +20,7 @@ public class Order<T> {
     }
 
     public double calculateTotalPrice() {
-        double total = 0;
-
+        total = 0.0;
         for (T item : items) {
             if (item instanceof Sandwich) {
                 total += ((Sandwich) item).calculatePrice();
@@ -60,4 +61,5 @@ public class Order<T> {
     public String getCustomerName() {
         return customerName;
     }
+
 }

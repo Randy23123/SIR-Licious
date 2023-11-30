@@ -17,17 +17,17 @@ import java.util.Scanner;
 public class OrderMenu {
     // Store orders
     private final List<Order> orderEntries = new ArrayList<>();
+    private Random random = new Random();
 
     public void displayMenu() {
         Scanner scan = new Scanner(System.in);
         int orderOption;
         String customerName;
-        Random random = new Random();
+        int id = random.nextInt(100000);
 
         System.out.println("Can I have a name for your order?");
         customerName = scan.nextLine();
         do {
-            int id = random.nextInt(100000);
             System.out.println("""
                     \nOrder Menu Screen:
                     1. Add Sandwich

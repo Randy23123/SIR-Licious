@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CheckOut {
+
+
     public static void saveOrderEntry(Order<?> order) {
         File receiptsFolder = new File("src/main/resources/receipts");
         if (!receiptsFolder.exists()) {
@@ -24,7 +26,9 @@ public class CheckOut {
         String orderInformation = getOrderDetails(order);
         try (BufferedWriter write = new BufferedWriter(new FileWriter(fileName,true))) {
             if (orderInformation != null) {
+                write.write(getCustomerDetails(order));
                 write.write(orderInformation);
+                write.write(getTotalOder(order));
             }
             System.out.println("Order successfully saved under " + fileName);
         } catch (IOException e) {
@@ -38,36 +42,109 @@ public class CheckOut {
         return "src/main/resources/receipts/" + present.format(formatDate) + ".txt";
     }
 
-    private static String getOrderDetails(Order<?> order) {
+    private static String getSandwichOrderDetails(Sandwich sandwich) {
         StringBuilder details = new StringBuilder();
-        details.append("Order ID: ").append(order.getOrderID()).append("\n");
-        details.append("Customer Name: ").append(order.getCustomerName()).append("\n");
-        details.append("Items Ordered:\n");
-        List<?> items =  order.getItems();
-        double total = 0.00;
+
+        details.append(String.format("%-20s %-12d $%-15.2f $%.2f\n", "Sandwich", 1, sandwich.calculatePrice(), sandwich.calculatePrice()));
+        return details.toString();
+    }
+
+    private static String getDrinkOrderDetails(Drink drink) {
+        StringBuilder details = new StringBuilder();
+
+        details.append(String.format("%-20s %-12d $%-15.2f $%.2f\n", "Drink", 1, drink.getPrice(drink.getSize()), drink.getPrice(drink.getSize())));
+        return details.toString();
+    }
+
+    private static String getChipsOrderDetails(Chips chips) {
+        StringBuilder details = new StringBuilder();
+
+        details.append(String.format("%-20s %-12d $%-15.2f $%.2f\n", "Chips", 1, chips.getPrice(), chips.getPrice()));
+        return details.toString();
+    }
+
+    private static String getCustomerDetails(Order order) {
+        StringBuilder details = new StringBuilder();
+
+        List<?> items = order.getItems();
+
         for (Object item : items) {
-            if (item instanceof Sandwich) {
-                details.append(getSandwichOrder((Sandwich) item));
-            } else if (item instanceof Drink) {
-                details.append(getDrinkOrder((Drink) item));
-            } else if (item instanceof Chips) {
-                details.append(getChipsOrder((Chips) item));
+           if (item instanceof Sandwich) {
+               // Header
+               details.append("========================================\n");
+               details.append("              RECEIPT\n");
+               details.append("========================================\n\n");
+               // Receipt ID and Date
+               details.append("Receipt ID: #").append(order.getOrderID()).append("\n");
+               details.append("Date: ").append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"))).append("\n\n");
+
+               // Customer Information
+               details.append("----------------------------------------\n");
+               details.append("Customer Information:\n");
+               details.append("Name: ").append(order.getCustomerName()).append("\n");
+               details.append("----------------------------------------\n\n");
             }
         }
-
-        total += order.calculateTotalPrice();
-
-        details.append("Order Total Cost: $").append(total).append("\n");
 
         return details.toString();
     }
 
-    private static String getSandwichOrder(Sandwich sandwich) {
-        String deliOrder = "Bread Type: " + sandwich.getBread().getBreadType() + "\n" +
-                "Toppings: \n" + getToppingInformation(sandwich.getToppings()) + "\n" +
-                "Toasted: " + sandwich.isToasted() + "\n";
-        return "Sandwich Details:\n" + deliOrder;
+    private static String getOrderDetails(Order<?> order) {
+        StringBuilder details = new StringBuilder();
 
+        // Header, Receipt ID, Date, and Customer Information - unchanged
+
+        // Order Details
+        details.append("Order Details:\n\n");
+        details.append(String.format("%-20s %-12s %-16s %s\n", "Item", "Quantity", "Unit Price", "Subtotal"));
+        details.append("--------------------------------------------------------\n");
+
+        List<?> items = order.getItems();
+
+        for (Object item : items) {
+            if (item instanceof Sandwich sandwich) {
+                details.append(getSandwichOrderDetails(sandwich));
+                details.append(getToppingInformation(sandwich.getToppings()));
+            } else if (item instanceof Drink drink) {
+                details.append(getDrinkOrderDetails(drink));
+            } else if (item instanceof Chips chips) {
+                details.append(getChipsOrderDetails(chips));
+            }
+        }
+        return details.toString();
+    }
+
+
+    private static String getTotalOder(Order order) {
+        StringBuilder details = new StringBuilder();
+        double total = 10.50;
+
+        List<?> items = order.getItems();
+
+        for (Object item : items) {
+            if (item instanceof Chips) {
+
+                total += order.calculateTotalPrice();
+
+                details.append("--------------------------------------------------------\n");
+                details.append(String.format("%46s $%.2f\n", "Subtotal:", total));
+                details.append(String.format("%46s $%.2f\n", "Tax (8%):", total += total * 0.08));
+                details.append(String.format("%46s $%.2f\n\n", "Total:", total));
+
+                // Payment Information
+                details.append("----------------------------------------\n");
+                details.append("Payment Information:\n");
+                details.append("\n");
+
+                // Footer
+                details.append("========================================\n\n");
+                details.append("Thank you for your purchase!\n");
+                details.append("Please contact us if you have any questions.\n\n");
+                details.append("========================================\n");
+            }
+        }
+
+        return details.toString();
     }
 
     private static String getToppingInformation(List<Toppings> toppings) {
@@ -77,123 +154,19 @@ public class CheckOut {
         }
         return toppingInformation.toString();
     }
-
-    private static String getDrinkOrder(Drink drink) {
+//    private static String getSandwichOrder(Sandwich sandwich) {
+//        String deliOrder = "Bread Type: " + sandwich.getBread().getBreadType() + "\n" +
+//                "Toppings: \n" + getToppingInformation(sandwich.getToppings()) + "\n" +
+//                "Toasted: " + sandwich.isToasted() + "\n";
+//        return "Sandwich Details:\n" + deliOrder;
+//
+//    }
+/*    private static String getDrinkOrder(Drink drink) {
         return "Drink: " + drink.getDrinkType() + " | Size: " + drink.getSize() + "\n";
     }
 
     private static String getChipsOrder(Chips chips) {
         return "Chips: " + chips.getChipType() + " | Price: $" + chips.getPrice() + "\n";
     }
-
-//    public Order<?> LoadingOrder(String fileName) throws FileNotFoundException {
-//        try (BufferedReader read =  new BufferedReader(new FileReader(fileName))) {
-//            String line;
-//            int orderID = 0;
-//            String customerName = "";
-//            List<Object> items = new ArrayList<>();
-//
-//            while ((line = read.readLine()) != null) {
-//                String[] parts = line.split(":");
-//                String key = parts[0].trim();
-//                String value = parts[1].trim();
-//
-//                switch (key) {
-//                    case "OrderID":
-//                        orderID = Integer.parseInt(value);
-//                        break;
-//                    case "CustomerName":
-//                        customerName = value;
-//                        break;
-//                    case "Sandwich":
-//                        items.add(parseSandwich(value));
-//                        break;
-//                    case "Drink":
-//                        items.add(parseDrink(value));
-//                        break;
-//                    case "Chips":
-//                        items.add(parseChips(value));
-//                        break;
-//                }
-//            }
-//            return new Order<Object>(orderID, customerName, items);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-//    private Sandwich parseSandwich(String value) {
-//        String[] parts = value.split(" | ");
-//        Bread bread = null;
-//        List<Toppings> toppings = new ArrayList<>();
-//        boolean toasted =  false;
-//
-//        for (String part : parts) {
-//            String[] pair = part.split(": ");
-//            String key = pair[0].trim();
-//            String values = pair[1].trim();
-//
-//            switch (key) {
-//                case "Bread":
-//                    bread = new Bread(values);
-//                    break;
-//                case "Toppings":
-//                    String[] toppingsList = values.split(" | ");
-//                    for (String topping : toppingsList) {
-//                        toppings.add(new RegularToppings(topping)); // instance of RegularList?
-//                    }
-//                    break;
-//                case "Cheese":
-//                    toppings.add(new Cheese(values, "Regular", 0.0));
-//                    break;
-//                case "Toasted":
-//                    toasted = Boolean.parseBoolean(values);
-//                    break;
-//            }
-//        }
-//        return new Sandwich(bread, toppings, toasted);
-//    }
-//
-//    private Drink parseDrink(String value) {
-//        String[] parts = value.split(" | ");
-//        String type = null;
-//        String size = null;
-//
-//        for (String part : parts) {
-//            String[] pair = part.split(": ");
-//            String key = pair[0].trim();
-//            String values = pair[1].trim();
-//
-//            switch (key) {
-//                case "Type":
-//                    type = values;
-//                    break;
-//                case "Size":
-//                    size = values;
-//                    break;
-//            }
-//        }
-//        return new Drink(type, size);
-//    }
-//
-//    private Chips parseChips(String value) {
-//        String[] parts = value.split(" | ");
-//        String type = null;
-//        double price = 0.0;
-//
-//        for (String part : parts) {
-//            String[] pair = part.split(": ");
-//            String key = pair[0].trim();
-//            String values = pair[1].trim();
-//
-//            switch (key) {
-//                case "Type":
-//                    type = values;
-//                    break;
-//                case "Price":
-//                    price = Double.parseDouble(values);
-//            }
-//        }
-//        return new Chips(type, price);
-//    }
+    */
 }

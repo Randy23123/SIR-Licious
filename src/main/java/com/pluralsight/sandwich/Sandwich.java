@@ -8,7 +8,6 @@ public class Sandwich {
     private final Bread bread;
     private final List<Toppings> toppings;
     private final boolean toasted;
-    private double SandwichPrice;
 
     public Sandwich(Bread bread, List<Toppings> toppings, boolean toasted) {
         this.bread = bread;
@@ -27,13 +26,13 @@ public class Sandwich {
 
 
     public double getSandwichPricePrice(String sizeType) {
-        return switch (sizeType) {
-            case "4" -> this.SandwichPrice = 5.50;
-            case "8" -> this.SandwichPrice = 7.00;
-            case "12" -> this.SandwichPrice = 8.50;
-            default -> 0;
+        double sandwichPrice = 0;
+         switch (sizeType) {
+            case "4" -> sandwichPrice = 5.50;
+            case "8" -> sandwichPrice = 7.00;
+            case "12" -> sandwichPrice = 8.50;
         };
-
+         return sandwichPrice;
     }
 
 
@@ -56,4 +55,14 @@ public class Sandwich {
     public boolean isToasted() {
         return toasted;
     }
+
+    @Override
+    public String toString() {
+        return "Sandwich{" +
+                "bread=" + bread +
+                ", toppings=" + toppings +
+                ", toasted=" + toasted +
+                '}';
+    }
+
 }

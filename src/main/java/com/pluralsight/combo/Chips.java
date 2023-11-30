@@ -13,9 +13,11 @@ public class Chips {
     public String getChipType() {
         return this.chipType;
     }
+
     public double getPrice() {
         return price;
     }
+
     public static ArrayList<Chips> createChipList() {
         ArrayList<Chips> chipsList = new ArrayList<>();
 
@@ -30,5 +32,13 @@ public class Chips {
         chipsList.add(new Chips("Honey Mustard", 1.5));
         chipsList.add(new Chips("Sweet Chili Heat", 1.5));
         return chipsList;
+    }
+
+    @Override
+    public String toString() {
+        return "Chips{" +
+                "chipType='" + chipType + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
