@@ -10,9 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CheckOut {
-
-
+private static double total = 0.00;
     public static void saveOrderEntry(Order<?> order) {
+        CheckOut checkOut = new CheckOut();
         File receiptsFolder = new File("src/main/resources/receipts");
         if (!receiptsFolder.exists()) {
             boolean createNew = receiptsFolder.mkdir();
@@ -23,7 +23,7 @@ public class CheckOut {
         }
 
         String fileName = fileNameFormat();
-        String orderInformation = getOrderDetails(order);
+        String orderInformation = checkOut.getOrderDetails(order);
         try (BufferedWriter write = new BufferedWriter(new FileWriter(fileName, true))) {
             if (orderInformation != null) {
                 write.write(getCustomerDetails(order));
@@ -89,7 +89,7 @@ public class CheckOut {
         return details.toString();
     }
 
-    private static String getOrderDetails(Order<?> order) {
+    private String getOrderDetails(Order<?> order) {
         StringBuilder details = new StringBuilder();
 
         // Header, Receipt ID, Date, and Customer Information - unchanged
@@ -105,10 +105,13 @@ public class CheckOut {
             if (item instanceof Sandwich sandwich) {
                 details.append(getSandwichOrderDetails(sandwich));
                 details.append(getToppingInformation(sandwich.getToppings()));
+                total += order.calculateTotalPrice();
             } else if (item instanceof Drink drink) {
                 details.append(getDrinkOrderDetails(drink));
+                total += order.calculateTotalPrice();
             } else if (item instanceof Chips chips) {
                 details.append(getChipsOrderDetails(chips));
+                total += order.calculateTotalPrice();
             }
         }
         return details.toString();
@@ -117,18 +120,15 @@ public class CheckOut {
 
     private static String getTotalOder(Order order) {
         StringBuilder details = new StringBuilder();
-        double total = 10.50;
 
         List<?> items = order.getItems();
 
         for (Object item : items) {
             if (item instanceof Chips) {
 
-                total += order.calculateTotalPrice();
-
                 details.append("--------------------------------------------------------\n");
                 details.append(String.format("%46s $%.2f\n", "Subtotal:", total));
-                details.append(String.format("%46s $%.2f\n", "Tax (8%):", total += total * 0.08));
+                details.append(String.format("%46s $%.2f\n", "Tax (8%):", total * 0.08));
                 details.append(String.format("%46s $%.2f\n\n", "Total:", total));
 
                 // Payment Information
