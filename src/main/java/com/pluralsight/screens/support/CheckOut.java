@@ -85,7 +85,7 @@ public class CheckOut {
     private static String getChipsOrder(Chips chips) {
         return "Chips: " + chips.getChipType() + " | Price: $" + chips.getPrice() + "\n";
     }
-
+}
 //    public Order<?> LoadingOrder(String fileName) throws FileNotFoundException {
 //        try (BufferedReader read =  new BufferedReader(new FileReader(fileName))) {
 //            String line;
@@ -196,4 +196,3 @@ public class CheckOut {
 //        }
 //        return new Chips(type, price);
 //    }
-}
