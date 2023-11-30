@@ -2,7 +2,7 @@ package com.pluralsight.sandwich;
 
 public class Bread {
     private String breadType;
-    private static String sizeType;
+    protected static String sizeType;
 
     public Bread(String breadType, String sizeType) {
         this.breadType = breadType;
@@ -12,8 +12,17 @@ public class Bread {
     public String getBreadType() {
         return breadType;
     }
+
     public static String getSizeType() {
         return sizeType;
+    }
+
+    public void setBreadType(String breadType) {
+        this.breadType = breadType;
+    }
+
+    public static void setSizeType(String sizeType) {
+        Bread.sizeType = sizeType;
     }
 }
 
