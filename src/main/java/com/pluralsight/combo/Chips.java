@@ -3,8 +3,8 @@ package com.pluralsight.combo;
 import java.util.ArrayList;
 
 public class Chips {
-    private String chipType;
-    private double price;
+    private final String chipType;
+    private final double price;
 
     public Chips(String chipType, double price) {
         this.chipType = chipType;

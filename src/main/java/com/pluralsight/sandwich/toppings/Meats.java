@@ -12,6 +12,10 @@ public class Meats extends PremiumToppings {
         this.meatPrice = meatPrice;
     }
 
+    @Override
+    public double getPrice() {
+        return getMeatPrice();
+    }
 
     public double getMeatPrice() {
     switch (Size.getSizeType()) {

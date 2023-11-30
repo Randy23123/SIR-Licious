@@ -1,24 +1,17 @@
 package com.pluralsight.sandwich.toppings;
 
 public class RegularToppings implements Toppings {
-    private String name;
-    private String category;
-    private double price;
+    private final String name;
+    private final double price;
 
-    public RegularToppings(String name, String category, RegularList regularList) {
+    public RegularToppings(String name) {
         this.name = name;
-        this.category = category;
         this.price = 0.00;
     }
 
     @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public String getCategory() {
-        return category;
     }
 
     @Override

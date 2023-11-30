@@ -1,18 +1,13 @@
 package com.pluralsight.screens.support;
 
-import com.pluralsight.combo.Chips;
-import com.pluralsight.combo.Drink;
-import com.pluralsight.sandwich.Bread;
-import com.pluralsight.sandwich.Sandwich;
-import com.pluralsight.sandwich.toppings.Cheese;
-import com.pluralsight.sandwich.toppings.RegularToppings;
-import com.pluralsight.sandwich.toppings.Toppings;
+import com.pluralsight.combo.*;
+import com.pluralsight.sandwich.*;
+import com.pluralsight.sandwich.toppings.*;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CheckOut {
     public static void saveOrderEntry(Order<?> order) {
@@ -49,7 +44,7 @@ public class CheckOut {
         details.append("Customer Name: ").append(order.getCustomerName()).append("\n");
         details.append("Items Ordered:\n");
         List<?> items =  order.getItems();
-
+        double total = 0.00;
         for (Object item : items) {
             if (item instanceof Sandwich) {
                 details.append(getSandwichOrder((Sandwich) item));
@@ -59,7 +54,10 @@ public class CheckOut {
                 details.append(getChipsOrder((Chips) item));
             }
         }
-        details.append("Order Total Cost: $").append(order.calculateTotalPrice()).append("\n");
+
+        total += order.calculateTotalPrice();
+
+        details.append("Order Total Cost: $").append(total).append("\n");
 
         return details.toString();
     }
@@ -88,114 +86,114 @@ public class CheckOut {
         return "Chips: " + chips.getChipType() + " | Price: $" + chips.getPrice() + "\n";
     }
 
-    public Order<?> LoadingOrder(String fileName) throws FileNotFoundException {
-        try (BufferedReader read =  new BufferedReader(new FileReader(fileName))) {
-            String line;
-            int orderID = 0;
-            String customerName = "";
-            List<Object> items = new ArrayList<>();
-
-            while ((line = read.readLine()) != null) {
-                String[] parts = line.split(":");
-                String key = parts[0].trim();
-                String value = parts[1].trim();
-
-                switch (key) {
-                    case "OrderID":
-                        orderID = Integer.parseInt(value);
-                        break;
-                    case "CustomerName":
-                        customerName = value;
-                        break;
-                    case "Sandwich":
-                        items.add(parseSandwich(value));
-                        break;
-                    case "Drink":
-                        items.add(parseDrink(value));
-                        break;
-                    case "Chips":
-                        items.add(parseChips(value));
-                        break;
-                }
-            }
-            return new Order<Object>(orderID, customerName, items);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private Sandwich parseSandwich(String value) {
-        String[] parts = value.split(" | ");
-        Bread bread = null;
-        List<Toppings> toppings = new ArrayList<>();
-        boolean toasted =  false;
-
-        for (String part : parts) {
-            String[] pair = part.split(": ");
-            String key = pair[0].trim();
-            String values = pair[1].trim();
-
-            switch (key) {
-                case "Bread":
-                    bread = new Bread(values);
-                    break;
-                case "Toppings":
-                    String[] toppingsList = values.split(" | ");
-                    for (String topping : toppingsList) {
-                        toppings.add(new RegularToppings(topping, "Regular", null)); // instance of RegularList?
-                    }
-                    break;
-                case "Cheese":
-                    toppings.add(new Cheese(values, "Regular", 0.0));
-                    break;
-                case "Toasted":
-                    toasted = Boolean.parseBoolean(values);
-                    break;
-            }
-        }
-        return new Sandwich(bread, toppings, toasted);
-    }
-
-    private Drink parseDrink(String value) {
-        String[] parts = value.split(" | ");
-        String type = null;
-        String size = null;
-
-        for (String part : parts) {
-            String[] pair = part.split(": ");
-            String key = pair[0].trim();
-            String values = pair[1].trim();
-
-            switch (key) {
-                case "Type":
-                    type = values;
-                    break;
-                case "Size":
-                    size = values;
-                    break;
-            }
-        }
-        return new Drink(type, size);
-    }
-
-    private Chips parseChips(String value) {
-        String[] parts = value.split(" | ");
-        String type = null;
-        double price = 0.0;
-
-        for (String part : parts) {
-            String[] pair = part.split(": ");
-            String key = pair[0].trim();
-            String values = pair[1].trim();
-
-            switch (key) {
-                case "Type":
-                    type = values;
-                    break;
-                case "Price":
-                    price = Double.parseDouble(values);
-            }
-        }
-        return new Chips(type, price);
-    }
+//    public Order<?> LoadingOrder(String fileName) throws FileNotFoundException {
+//        try (BufferedReader read =  new BufferedReader(new FileReader(fileName))) {
+//            String line;
+//            int orderID = 0;
+//            String customerName = "";
+//            List<Object> items = new ArrayList<>();
+//
+//            while ((line = read.readLine()) != null) {
+//                String[] parts = line.split(":");
+//                String key = parts[0].trim();
+//                String value = parts[1].trim();
+//
+//                switch (key) {
+//                    case "OrderID":
+//                        orderID = Integer.parseInt(value);
+//                        break;
+//                    case "CustomerName":
+//                        customerName = value;
+//                        break;
+//                    case "Sandwich":
+//                        items.add(parseSandwich(value));
+//                        break;
+//                    case "Drink":
+//                        items.add(parseDrink(value));
+//                        break;
+//                    case "Chips":
+//                        items.add(parseChips(value));
+//                        break;
+//                }
+//            }
+//            return new Order<Object>(orderID, customerName, items);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    private Sandwich parseSandwich(String value) {
+//        String[] parts = value.split(" | ");
+//        Bread bread = null;
+//        List<Toppings> toppings = new ArrayList<>();
+//        boolean toasted =  false;
+//
+//        for (String part : parts) {
+//            String[] pair = part.split(": ");
+//            String key = pair[0].trim();
+//            String values = pair[1].trim();
+//
+//            switch (key) {
+//                case "Bread":
+//                    bread = new Bread(values);
+//                    break;
+//                case "Toppings":
+//                    String[] toppingsList = values.split(" | ");
+//                    for (String topping : toppingsList) {
+//                        toppings.add(new RegularToppings(topping)); // instance of RegularList?
+//                    }
+//                    break;
+//                case "Cheese":
+//                    toppings.add(new Cheese(values, "Regular", 0.0));
+//                    break;
+//                case "Toasted":
+//                    toasted = Boolean.parseBoolean(values);
+//                    break;
+//            }
+//        }
+//        return new Sandwich(bread, toppings, toasted);
+//    }
+//
+//    private Drink parseDrink(String value) {
+//        String[] parts = value.split(" | ");
+//        String type = null;
+//        String size = null;
+//
+//        for (String part : parts) {
+//            String[] pair = part.split(": ");
+//            String key = pair[0].trim();
+//            String values = pair[1].trim();
+//
+//            switch (key) {
+//                case "Type":
+//                    type = values;
+//                    break;
+//                case "Size":
+//                    size = values;
+//                    break;
+//            }
+//        }
+//        return new Drink(type, size);
+//    }
+//
+//    private Chips parseChips(String value) {
+//        String[] parts = value.split(" | ");
+//        String type = null;
+//        double price = 0.0;
+//
+//        for (String part : parts) {
+//            String[] pair = part.split(": ");
+//            String key = pair[0].trim();
+//            String values = pair[1].trim();
+//
+//            switch (key) {
+//                case "Type":
+//                    type = values;
+//                    break;
+//                case "Price":
+//                    price = Double.parseDouble(values);
+//            }
+//        }
+//        return new Chips(type, price);
+//    }
 }
