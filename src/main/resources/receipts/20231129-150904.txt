@@ -1,5 +1,0 @@
-Order ID: 97217
-Customer Name: Sing
-Items Ordered:
-Chips: Salt & Vinegar | Price: $1.5
-Order Total Cost: $1.5
