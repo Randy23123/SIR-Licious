@@ -211,13 +211,13 @@ public class OrderMenu {
 
         System.out.println("\n****** Choose your vegetables ******");
 
-        List<RegularList> vegetables = RegularList.createVegetablesList();
-        List<RegularList> selectedVegetables = new ArrayList<>();
+        List<RegularToppings> vegetables = RegularToppings.createVegetablesList();
+        List<RegularToppings> selectedVegetables = new ArrayList<>();
 
         do {
             System.out.println("\nAvailable Vegetables:");
             int index2 = 1;
-            for (RegularList vegetable : vegetables) {
+            for (RegularToppings vegetable : vegetables) {
                 System.out.println(index2 + " " + vegetable.getName());
                 index2++;
             }
@@ -228,7 +228,7 @@ public class OrderMenu {
                 // User chose to finish
                 break;
             }
-            RegularList chosenVegetable = vegetables.get(choiceVegetables - 1);
+            RegularToppings chosenVegetable = vegetables.get(choiceVegetables - 1);
             selectedVegetables.add(chosenVegetable);
 
         } while (true);
@@ -239,13 +239,13 @@ public class OrderMenu {
 
         System.out.println("\n****** Choose your sauces ******");
 
-        List<RegularList> sauces = RegularList.createSaucesList();
-        List<RegularList> selectedSauces = new ArrayList<>();
+        List<RegularToppings> sauces = RegularToppings.createSaucesList();
+        List<RegularToppings> selectedSauces = new ArrayList<>();
 
         do {
             System.out.println("\nAvailable Sauces:");
             int index3 = 1;
-            for (RegularList sauce : sauces) {
+            for (RegularToppings sauce : sauces) {
                 System.out.println(index3 + " " + sauce.getName());
                 index3++;
             }
@@ -255,7 +255,7 @@ public class OrderMenu {
             if (choiceSauces == 0) {
                 break;
             }
-            RegularList chosenSauce = sauces.get(choiceSauces - 1);
+            RegularToppings chosenSauce = sauces.get(choiceSauces - 1);
             selectedSauces.add(chosenSauce);
         }while (true);
 
@@ -265,13 +265,13 @@ public class OrderMenu {
 
         System.out.println("\n****** Choose your sides ******");
 
-        List<RegularList> sidesList = RegularList.createSidesList();
-        List<RegularList> selectedSides = new ArrayList<>();
+        List<RegularToppings> sidesList = RegularToppings.createSidesList();
+        List<RegularToppings> selectedSides = new ArrayList<>();
 
         do {
             System.out.println("\nAvailable Sides:");
         int index4 = 1;
-        for (RegularList sides : sidesList) {
+        for (RegularToppings sides : sidesList) {
             System.out.println(index4 + " " + sides.getName());
             index4++;
         }
@@ -281,7 +281,7 @@ public class OrderMenu {
             if (choiceSides == 0) {
                 break;
             }
-        RegularList chosenSides = sidesList.get(choiceSides - 1);
+            RegularToppings chosenSides = sidesList.get(choiceSides - 1);
             selectedSides.add(chosenSides);
         }while (true);
 
