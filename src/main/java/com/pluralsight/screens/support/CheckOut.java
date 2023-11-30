@@ -137,7 +137,7 @@ public class CheckOut {
                 case "Toppings":
                     String[] toppingsList = values.split(" | ");
                     for (String topping : toppingsList) {
-                        toppings.add(new RegularToppings(topping, "Regular", null)); // instance of RegularList?
+                        toppings.add(new RegularToppings(topping)); // instance of RegularList?
                     }
                     break;
                 case "Cheese":

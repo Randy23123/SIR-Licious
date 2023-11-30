@@ -1,5 +1,6 @@
 package com.pluralsight.screens;
 
+import com.pluralsight.sandwich.toppings.*;
 import com.pluralsight.screens.support.CheckOut;
 import com.pluralsight.screens.support.Order;
 import com.pluralsight.combo.Chips;
@@ -7,9 +8,6 @@ import com.pluralsight.combo.Drink;
 import com.pluralsight.sandwich.Bread;
 import com.pluralsight.sandwich.Sandwich;
 import com.pluralsight.sandwich.Size;
-import com.pluralsight.sandwich.toppings.Cheese;
-import com.pluralsight.sandwich.toppings.Meats;
-import com.pluralsight.sandwich.toppings.Toppings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +88,7 @@ public class OrderMenu {
             case 3 -> selectedBread = new Bread("Rye");
             case 4 -> selectedBread = new Bread("Wrap");
         }
-        System.out.println("2. Choose sandwich size");
+        System.out.println("\n****** Choose sandwich size ******");
         System.out.println("\t1. 4 inches");
         System.out.println("\t2. 8 inches");
         System.out.println("\t3. 12 inches");
@@ -102,6 +100,60 @@ public class OrderMenu {
             case 2 -> new Size("8");
             case 3 -> new Size("12");
         }
+        System.out.println("\n****** Choose your vegetables ******");
+
+        List<RegularList> vegetables = RegularList.createVegetablesList();
+
+        int index2 = 1;
+        for (RegularList vegetable : vegetables) {
+            System.out.println(index2 + " " + vegetable.getName());
+            index2++;
+        }
+
+        System.out.println("Select the vegetables you would like: ");
+        int choiceVegetables =  getIntInput(scan, 0, vegetables.size());
+
+
+        RegularList selectedVegetables  = vegetables.get(choiceVegetables - 1);
+
+        toppingsList.add(selectedVegetables);
+
+        System.out.println("\n****** Choose your sauces ******");
+
+        List<RegularList> sauces = RegularList.createSaucesList();
+
+        int index3 = 1;
+        for (RegularList sauce : sauces) {
+            System.out.println(index3 + " " + sauce.getName());
+            index3++;
+        }
+
+        System.out.println("Select the sauce you would like: ");
+        int choiceSauces =  getIntInput(scan, 0, sauces.size());
+
+
+        RegularList selectedSauce  = sauces.get(choiceSauces - 1);
+
+        toppingsList.add(selectedSauce);
+
+        System.out.println("\n****** Choose your sides ******");
+
+        List<RegularList> sidesList = RegularList.createSidesList();
+
+        int index4 = 1;
+        for (RegularList sides : sidesList) {
+            System.out.println(index4 + " " + sides.getName());
+            index4++;
+        }
+
+        System.out.println("Select the sides you would like: ");
+        int choiceSides =  getIntInput(scan, 0, sidesList.size());
+
+
+        RegularList selectedSides  = sidesList.get(choiceSides - 1);
+
+        toppingsList.add(selectedSides);
+
         System.out.println("\n****** Choose your meat ******");
 
         List<Meats> meatsList = Meats.createMeatsList(Size.getSizeType());
@@ -196,6 +248,7 @@ public class OrderMenu {
 
         // Once the sandwich is customized, create a Sandwich object
         Sandwich sandwich = new Sandwich(selectedBread,toppingsList, toast );
+        sandwich.getSandwichPricePrice(Size.getSizeType());
 
         // Create a List<Sandwich> to hold the sandwich in the order
         List<Sandwich> sandwichesList = new ArrayList<>();
@@ -204,6 +257,8 @@ public class OrderMenu {
         // Create an Order<Sandwich> instance
         Order<Sandwich> order = new Order<>(id, customerName, sandwichesList);
         orderEntries.add(order);
+
+        System.out.println(order.calculateTotalPrice());
 
         System.out.println("Sandwich successfully added to your order!");
     }
