@@ -142,8 +142,9 @@ public class OrderMenu {
                 // User chose to finish
                 return;
             }
+
             // Get the selected meat from the list
-            PremiumToppings selectedExtraMeats = meatsList.get(meatsList.size() - 1);
+            PremiumToppings selectedExtraMeats = meatsList.get(choiceExtraMeat - 1);
 
             toppingsList.add(selectedExtraMeats);
         }
