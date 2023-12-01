@@ -129,6 +129,7 @@ private static double total = 0.00;
                 details.append("--------------------------------------------------------\n");
                 details.append(String.format("%46s $%.2f\n", "Subtotal:", total));
                 details.append(String.format("%46s $%.2f\n", "Tax (8%):", total * 0.08));
+                total +=  (total * 0.08); // adds the taxes to the total
                 details.append(String.format("%46s $%.2f\n\n", "Total:", total));
 
                 // Payment Information
