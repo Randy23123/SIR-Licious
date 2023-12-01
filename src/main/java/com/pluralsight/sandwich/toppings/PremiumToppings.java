@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class PremiumToppings extends Bread implements Toppings {
     private final String name;
-    private double basePrice;
-    private double extraPrice;
+    private final double basePrice;
+    private final double extraPrice;
 
     public PremiumToppings(String name, String breadType, String sizeType, double basePrice, double extraPrice) {
         super(breadType, sizeType);

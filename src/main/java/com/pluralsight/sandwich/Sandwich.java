@@ -16,15 +16,6 @@ public class Sandwich {
         this.toasted = toasted;
     }
 
-    public void addTopping(Toppings topping) {
-
-        this.toppings.add(topping);
-    }
-
-    public void removeTopping(Toppings topping) {
-        toppings.removeIf(t -> t.equals(topping));
-    }
-
 
     public double getSandwichPricePrice(String sizeType) {
         return switch (sizeType) {
@@ -45,15 +36,8 @@ public class Sandwich {
         return totalPrice;
     }
 
-    public Bread getBread() {
-        return bread;
-    }
-
     public List<Toppings> getToppings() {
         return toppings;
     }
 
-    public boolean isToasted() {
-        return toasted;
-    }
 }

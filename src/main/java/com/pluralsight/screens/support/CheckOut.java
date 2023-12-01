@@ -25,11 +25,9 @@ private static double total = 0.00;
         String fileName = fileNameFormat();
         String orderInformation = checkOut.getOrderDetails(order);
         try (BufferedWriter write = new BufferedWriter(new FileWriter(fileName, true))) {
-            if (orderInformation != null) {
-                write.write(getCustomerDetails(order));
-                write.write(orderInformation);
-                write.write(getTotalOder(order));
-            }
+            write.write(getCustomerDetails(order));
+            write.write(orderInformation);
+            write.write(getTotalOder(order));
             System.out.println("Order successfully saved under " + fileName);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -43,27 +41,18 @@ private static double total = 0.00;
     }
 
     private static String getSandwichOrderDetails(Sandwich sandwich) {
-        StringBuilder details = new StringBuilder();
-
-        details.append(String.format("%-20s %-12d $%-15.2f $%.2f\n", "Sandwich", 1, sandwich.calculatePrice(), sandwich.calculatePrice()));
-        return details.toString();
+        return String.format("%-20s %-12d $%-15.2f $%.2f\n", "Sandwich", 1, sandwich.calculatePrice(), sandwich.calculatePrice());
     }
 
     private static String getDrinkOrderDetails(Drink drink) {
-        StringBuilder details = new StringBuilder();
-
-        details.append(String.format("%-20s %-12d $%-15.2f $%.2f\n", "Drink", 1, drink.getPrice(drink.getSize()), drink.getPrice(drink.getSize())));
-        return details.toString();
+        return String.format("%-20s %-12d $%-15.2f $%.2f\n", "Drink", 1, drink.getPrice(drink.getSize()), drink.getPrice(drink.getSize()));
     }
 
     private static String getChipsOrderDetails(Chips chips) {
-        StringBuilder details = new StringBuilder();
-
-        details.append(String.format("%-20s %-12d $%-15.2f $%.2f\n", "Chips", 1, chips.getPrice(), chips.getPrice()));
-        return details.toString();
+        return String.format("%-20s %-12d $%-15.2f $%.2f\n", "Chips", 1, chips.getPrice(), chips.getPrice());
     }
 
-    private static String getCustomerDetails(Order order) {
+    private static String getCustomerDetails(Order<?> order) {
         StringBuilder details = new StringBuilder();
 
         List<?> items = order.getItems();
@@ -118,7 +107,7 @@ private static double total = 0.00;
     }
 
 
-    private static String getTotalOder(Order order) {
+    private static String getTotalOder(Order<?> order) {
         StringBuilder details = new StringBuilder();
 
         List<?> items = order.getItems();

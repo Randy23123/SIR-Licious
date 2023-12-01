@@ -15,7 +15,8 @@ import java.util.Scanner;
 
 public class OrderMenu {
     // Store orders
-    private final List<Order> orderEntries = new ArrayList<>();
+    //This syntax is a wildcard that represents an unknown type. It indicates that the Order class can have different types of items.
+    private final List<Order<?>> orderEntries = new ArrayList<>();
 
     public void displayMenu() {
         Scanner scan = new Scanner(System.in);
@@ -51,7 +52,7 @@ public class OrderMenu {
                     addChips(scan, customerName, id);
                     break;
                 case 4:
-                    for (Order order : orderEntries) {
+                    for (Order<?> order : orderEntries) {
                         CheckOut.saveOrderEntry(order);
                     }
                     break;
