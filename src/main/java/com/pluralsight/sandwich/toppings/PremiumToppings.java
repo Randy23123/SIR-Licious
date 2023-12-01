@@ -68,7 +68,7 @@ public class PremiumToppings extends Bread implements Toppings {
                 meatsList.add(new PremiumToppings("bacon", breadType, sizeType, 3.0, 1.5));
                 break;
             default:
-                System.out.println("Error"); // can remove later
+                System.out.println("Error");
                 break;
         }
         return meatsList;
@@ -100,7 +100,7 @@ public class PremiumToppings extends Bread implements Toppings {
                 cheeseList.add(new PremiumToppings("american", breadType, sizeType, 2.25,0.90));
                 break;
             default:
-                System.out.println("Error"); // can remove later
+                System.out.println("Error");
                 break;
         }
         return cheeseList;
