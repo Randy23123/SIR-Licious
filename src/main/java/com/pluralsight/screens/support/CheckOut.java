@@ -10,7 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CheckOut {
-private static double total = 0.00;
+    // Variable to keep track of the total cost across the order
+    private static double total = 0.00;
+
+    // Method to save the order entry to a file
     public static void saveOrderEntry(Order<?> order) {
         CheckOut checkOut = new CheckOut();
         File receiptsFolder = new File("src/main/resources/receipts");
@@ -22,9 +25,12 @@ private static double total = 0.00;
             }
         }
 
+        // Generate a filename for the receipt based on the current date and time
         String fileName = fileNameFormat();
         String orderInformation = checkOut.getOrderDetails(order);
+
         try (BufferedWriter write = new BufferedWriter(new FileWriter(fileName, true))) {
+            // Write customer and order details to the file
             write.write(getCustomerDetails(order));
             write.write(orderInformation);
             write.write(getTotalOder(order));
@@ -34,24 +40,29 @@ private static double total = 0.00;
         }
     }
 
+    // Method to format the filename using the current date and time
     private static String fileNameFormat() {
         LocalDateTime present = LocalDateTime.now();
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         return "src/main/resources/receipts/" + present.format(formatDate) + ".txt";
     }
 
+    // Method to get the order details for a sandwich
     private static String getSandwichOrderDetails(Sandwich sandwich) {
         return String.format("%-20s %-12d $%-15.2f $%.2f\n", "Sandwich", 1, sandwich.calculatePrice(), sandwich.calculatePrice());
     }
 
+    // Method to get the order details for a drink
     private static String getDrinkOrderDetails(Drink drink) {
         return String.format("%-20s %-12d $%-15.2f $%.2f\n", "Drink", 1, drink.getPrice(drink.getSize()), drink.getPrice(drink.getSize()));
     }
 
+    // Method to get the order details for chips
     private static String getChipsOrderDetails(Chips chips) {
         return String.format("%-20s %-12d $%-15.2f $%.2f\n", "Chips", 1, chips.getPrice(), chips.getPrice());
     }
 
+    // Method to get customer details for the receipt
     private static String getCustomerDetails(Order<?> order) {
         StringBuilder details = new StringBuilder();
 
@@ -78,6 +89,7 @@ private static double total = 0.00;
         return details.toString();
     }
 
+    // Method to get the details of items in the order
     private String getOrderDetails(Order<?> order) {
         StringBuilder details = new StringBuilder();
 
@@ -106,7 +118,7 @@ private static double total = 0.00;
         return details.toString();
     }
 
-
+    // Method to get the total cost of the order
     private static String getTotalOder(Order<?> order) {
         StringBuilder details = new StringBuilder();
 
@@ -137,6 +149,7 @@ private static double total = 0.00;
         return details.toString();
     }
 
+    // Method to get the information about toppings
     private static String getToppingInformation(List<Toppings> toppings) {
         StringBuilder toppingInformation = new StringBuilder();
         for (Toppings topping : toppings) {

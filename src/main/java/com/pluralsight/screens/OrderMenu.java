@@ -72,25 +72,35 @@ public class OrderMenu {
 
 
     private void addSandwich(Scanner scan, String customerName, int id) {
+        // Create a list to store the selected toppings for the sandwich
         List<Toppings> toppingsList = new ArrayList<>();
 
+        // Choose the bread and size for the sandwich
         Bread bread = chooseBreadAndSize(scan);
 
+        // Choose the meat for the sandwich
         chooseMeat(scan, toppingsList, bread);
 
+        // Choose the cheese for the sandwich
         chooseCheese(scan, toppingsList);
 
+        // Choose the vegetables for the sandwich
         chooseVegetables(scan, toppingsList);
 
+        // Choose the sauces for the sandwich
         chooseSauces(scan, toppingsList);
 
+        // Choose the sides for the sandwich
         chooseSides(scan, toppingsList);
 
+        // Check if the customer wants the sandwich toasted
         boolean toasted = isToasted(scan);
 
+        // Create the sandwich with the selected options and add it to the order
         createAndAddToOrder(customerName, id, toppingsList, bread, toasted);
     }
 
+    // Check if the customer wants the sandwich toasted
     private boolean isToasted(Scanner scan) {
         System.out.println("\n****** Toast the sandwich ******");
 
@@ -99,22 +109,27 @@ public class OrderMenu {
         return inputToast.equals("yes");
     }
 
+    // Create the sandwich with the selected options and add it to the order
     private void createAndAddToOrder(String customerName, int id, List<Toppings> toppingsList, Bread selectedBread, boolean toasted) {
         Sandwich sandwich = new Sandwich(selectedBread, toppingsList, toasted);
         List<Sandwich> sandwichesList = new ArrayList<>();
         sandwichesList.add(sandwich);
 
+        // Create an order with the sandwich and add it to the order entries
         Order<Sandwich> order = new Order<>(id, customerName, sandwichesList);
         orderEntries.add(order);
         System.out.println("Sandwich successfully added to your order!");
     }
 
+    // Choose the sides for the sandwich
     private void chooseSides(Scanner scan, List<Toppings> toppingsList) {
         System.out.println("\n****** Choose your sides ******");
 
+        // Create a list of available sides
         List<RegularToppings> sidesList = RegularToppings.createSidesList();
         List<RegularToppings> selectedSides = new ArrayList<>();
 
+        // Allow the customer to select sides until they choose to finish
         do {
             System.out.println("\nAvailable Sides:");
             int index4 = 1;
@@ -132,15 +147,19 @@ public class OrderMenu {
             selectedSides.add(chosenSides);
         } while (true);
 
+        // Add the selected sides to the toppings list
         toppingsList.addAll(selectedSides);
     }
 
+    // Choose the sauces for the sandwich
     private void chooseSauces(Scanner scan, List<Toppings> toppingsList) {
         System.out.println("\n****** Choose your sauces ******");
 
+        // Create a list of available sauces
         List<RegularToppings> sauces = RegularToppings.createSaucesList();
         List<RegularToppings> selectedSauces = new ArrayList<>();
 
+        // Allow the customer to select sauces until they choose to finish
         do {
             System.out.println("\nAvailable Sauces:");
             int index3 = 1;
@@ -158,16 +177,20 @@ public class OrderMenu {
             selectedSauces.add(chosenSauce);
         } while (true);
 
+        // Add the selected sauces to the toppings list
         toppingsList.addAll(selectedSauces);
-
     }
 
+
+    // Method to allow the user to choose vegetables for the sandwich
     private void chooseVegetables(Scanner scan, List<Toppings> toppingsList) {
         System.out.println("\n****** Choose your vegetables ******");
 
+        // Create a list of available vegetables
         List<RegularToppings> vegetables = RegularToppings.createVegetablesList();
         List<RegularToppings> selectedVegetables = new ArrayList<>();
 
+        // Allow the user to select vegetables until they choose to finish
         do {
             System.out.println("\nAvailable Vegetables:");
             int index2 = 1;
@@ -187,13 +210,15 @@ public class OrderMenu {
 
         } while (true);
 
+        // Add the selected vegetables to the toppings list
         toppingsList.addAll(selectedVegetables);
-
     }
 
+    // Method to allow the user to choose cheese for the sandwich
     private void chooseCheese(Scanner scan, List<Toppings> toppingsList) {
         System.out.println("\n****** Add cheese ******");
 
+        // Create a list of available cheese options
         List<PremiumToppings> cheeseList = PremiumToppings.createCheeseList(Bread.getSizeType());
         int count = 1;
         for (PremiumToppings cheese : cheeseList) {
@@ -204,14 +229,16 @@ public class OrderMenu {
 
         getIntInput(scan, 0, cheeseList.size());
 
-        // Get the selected meat from the list
+        // Get the selected cheese from the list
         PremiumToppings selectedCheese = cheeseList.get(cheeseList.size() - 1);
 
         toppingsList.add(selectedCheese);
 
+        // Ask if the user wants to add extra cheese
         System.out.println("Would you like to add extra cheese (Yes / NO)?");
         String inputCheese = scan.next().trim().toLowerCase();
         if (inputCheese.equals("yes")) {
+            // Display options for extra cheese and add to the toppings list
             int counter = 1;
             for (PremiumToppings cheese : cheeseList) {
                 System.out.println(counter + " " + cheese.getName() + " - Price: $" + cheese.getExtraPrice());
@@ -222,15 +249,18 @@ public class OrderMenu {
 
             getIntInput(scan, 0, cheeseList.size());
 
-            // Get the selected meat from the list
+            // Get the selected extra cheese from the list
             PremiumToppings selectedExtraCheese = cheeseList.get(cheeseList.size() - 1);
 
             toppingsList.add(selectedExtraCheese);
         }
     }
 
+    // Method to allow the user to choose meat for the sandwich
     private void chooseMeat(Scanner scan, List<Toppings> toppingsList, Bread bread) {
         System.out.println("\n****** Choose your meat ******");
+
+        // Create a list of available meat options based on bread type and size
         List<PremiumToppings> meatsList = PremiumToppings.createMeatsList(bread.getBreadType(), Bread.getSizeType());
         int index = 1;
         for (PremiumToppings meats : meatsList) {
@@ -250,9 +280,11 @@ public class OrderMenu {
 
         toppingsList.add(selectedMeats);
 
+        // Ask if the user wants to add extra meat
         System.out.println("Would you like to add extra meat (Yes / NO)?");
         String input = scan.next().trim().toLowerCase();
         if (input.equals("yes")) {
+            // Display options for extra meat and add to the toppings list
             int count1 = 1;
             for (PremiumToppings meats : meatsList) {
                 System.out.println(count1 + " " + meats.getName() + " - Price: $" + meats.getExtraPrice());
@@ -268,13 +300,14 @@ public class OrderMenu {
                 return;
             }
 
-            // Get the selected meat from the list
+            // Get the selected extra meat from the list
             PremiumToppings selectedExtraMeats = meatsList.get(choiceExtraMeat - 1);
 
             toppingsList.add(selectedExtraMeats);
         }
     }
 
+    // Method to allow the user to choose the type of bread and its size
     private Bread chooseBreadAndSize(Scanner scan) {
         // Display the options for customizing the sandwich
         System.out.println("Customize your sandwich:");
@@ -284,7 +317,7 @@ public class OrderMenu {
         System.out.println("\t3. Rye");
         System.out.println("\t4. Wrap");
 
-        /* pass the chosen options */
+        // Get the chosen bread type
         int breadChoice = getIntInput(scan, 1, 4);
         Bread selectedBread = switch (breadChoice) {
             case 1 -> new Bread("White", "");
@@ -299,7 +332,7 @@ public class OrderMenu {
         System.out.println("\t2. 8 inches");
         System.out.println("\t3. 12 inches");
 
-        /* pass the chosen options */
+        // Get the chosen bread size
         int sizeChoice = getIntInput(scan, 1, 3);
         Bread.setSizeType(switch (sizeChoice) {
             case 1 -> ("4");
@@ -310,6 +343,7 @@ public class OrderMenu {
 
         return selectedBread;
     }
+
 
     private void addDrinks(Scanner scan, String customerName, int id) {
         ArrayList<Drink> drinkArrayList = Drink.createDrinkList();
